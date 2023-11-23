@@ -4,10 +4,10 @@ import axios from "axios";
 import data from "../todos.json";
 
 type Todo = {
-  id: number;
+  id: string;
   title: string;
   details: string;
-  column: boolean;
+  column: string;
 };
 
 type InitialState = {

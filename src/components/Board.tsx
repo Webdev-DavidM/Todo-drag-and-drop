@@ -12,6 +12,7 @@ import React, { useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { lime, purple } from "@mui/material/colors";
 import { useSelector } from "react-redux";
+import { useSortItemsIntoColumns } from "../hooks/useSortIntoColumns";
 
 const tasks = [
   { id: "1", content: "First task" },
@@ -77,7 +78,9 @@ function Board() {
   const [columns, setColumns] = useState(taskStatus);
   const theme = useTheme();
   const desktop = theme.breakpoints.up("lg");
-  const toDos = useSelector((state: any) => state.toDos);
+  const toDos = useSelector((state: any) => state.toDoList.toDoList);
+  const { sortedColumns } = useSortItemsIntoColumns(toDos);
+  console.log("sortedColumns", sortedColumns);
   return (
     <DragDropContext
       onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
@@ -86,7 +89,7 @@ function Board() {
         container
         sx={{ display: "flex", justifyContent: "center", width: "100%" }}
       >
-        {Object.entries(columns)?.map(([columnId, column], index) => {
+        {Object.entries(sortedColumns)?.map(([columnId, column], index) => {
           return (
             <Box
               sx={{
@@ -121,7 +124,7 @@ function Board() {
                       }}
                     >
                       {column?.items?.map((item, index) => {
-                        console.log("item", item.id);
+                        console.log("item", typeof item.id);
                         return (
                           <Draggable
                             key={item.id}
@@ -147,15 +150,13 @@ function Board() {
                                       variant="h5"
                                       component="div"
                                     >
-                                      Lizard
+                                      {item.title}
                                     </Typography>
                                     <Typography
                                       variant="body2"
                                       color="text.secondary"
                                     >
-                                      Lizards are a widespread group of squamate
-                                      reptiles, with over 6,000 species, ranging
-                                      across all continents except Antarctica
+                                      {item.details}
                                     </Typography>
                                   </CardContent>
                                   <CardActions
