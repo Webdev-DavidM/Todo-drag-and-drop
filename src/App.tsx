@@ -50,7 +50,7 @@ function App() {
         Please drag and drop your todos in the relevant columns
       </Typography>
       {/* // need to fix this statement below */}
-      {!loading && toDos?.length === 0 && <Board />}
+      {/* {!loading && toDos?.length === 0 && <Board />} */}
       <Board />
 
       <Modal open={loading}>

@@ -100,7 +100,6 @@ function Board() {
                 border: "1px solid grey",
                 p: 2,
                 m: 2,
-                mt: desktop ? 6 : 2,
               }}
               key={columnId}
             >
