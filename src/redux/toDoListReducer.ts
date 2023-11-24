@@ -13,6 +13,7 @@ type Todo = {
 type InitialState = {
   loading: boolean;
   toDoList: Todo[] | [];
+  authenticated: boolean;
 };
 
 // type UpdatedTodo = {
@@ -42,12 +43,51 @@ export const updateToDo = createAsyncThunk(
   //   }
   // }
 );
+export const signUp = createAsyncThunk(
+  "toDoList/signUp",
+  async (updatedTodo, { dispatch, getState }) => {
+    // const state: InitialState[] | [] = getState();
+  }
+
+  //   console.log("place", place);
+  //   try {
+  //     const topFive = await axios.post("http://localhost:4000/topFivePlaces", {
+  //       place: `${place}`,
+  //     });
+  //     console.log("topFive", topFive);
+
+  //     return topFive;
+  //   } catch {
+  //     console.error("err");
+  //   }
+  // }
+);
+export const signIn = createAsyncThunk(
+  "toDoList/signIn",
+  async (updatedTodo, { dispatch, getState }) => {
+    // const state: InitialState[] | [] = getState();
+  }
+
+  //   console.log("place", place);
+  //   try {
+  //     const topFive = await axios.post("http://localhost:4000/topFivePlaces", {
+  //       place: `${place}`,
+  //     });
+  //     console.log("topFive", topFive);
+
+  //     return topFive;
+  //   } catch {
+  //     console.error("err");
+  //   }
+  // }
+);
 
 export const toDoListSlice = createSlice({
   name: "toDoList",
   initialState: {
     loading: false,
     toDoList: data.todos,
+    authenticated: true,
   } as InitialState,
   reducers: {
     setLoading: (state, action: PayloadAction<boolean>) => {

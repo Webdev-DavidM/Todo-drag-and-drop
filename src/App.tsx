@@ -1,16 +1,20 @@
 // Store
 import { useAppSelector } from "./hooks/hooks";
-
-// Components
-import todos from "./todos.json";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 
 // Mui
-import { Box, CircularProgress, Grid, Modal, Typography } from "@mui/material";
-import Board from "./components/Board";
+import { Grid } from "@mui/material";
+
+// Components
+import Board from "./components/pages/Board";
+import Loading from "./modals/Loading";
+import Login from "./components/pages/Login";
+import Signup from "./components/pages/Signup";
+import CheckLocalStorage from "./helpers/CheckLocalStorage";
+import ProtectedRoute from "./helpers/ProtectedRoute";
 
 function App() {
   const toDos = useAppSelector((state) => state.toDoList.toDoList);
-  const loading = useAppSelector((state) => state.toDoList.loading);
 
   return (
     <Grid
@@ -26,58 +30,26 @@ function App() {
         flexDirection: "column",
       }}
     >
-      <Typography
-        variant="h3"
-        color="primary"
-        sx={{
-          width: "100%",
-          textAlign: "center",
-          mt: 1,
-        }}
-      >
-        Todo list
-      </Typography>
-
-      <Typography
-        variant="h5"
-        color="primary"
-        sx={{
-          width: "100%",
-          textAlign: "center",
-          mt: 1,
-        }}
-      >
-        Please drag and drop your todos in the relevant columns
-      </Typography>
       {/* // need to fix this statement below */}
       {/* {!loading && toDos?.length === 0 && <Board />} */}
-      <Board />
-
-      <Modal open={loading}>
-        <Box
-          sx={{
-            position: "absolute",
-            left: 0,
-            top: 0,
-            width: "100vw",
-            height: "100vh",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
+        <Route exact path="/login" render={() => <Login />} />
+        <Route exact path="/signup" render={() => <Signup />} />
+        <Route
+          exact
+          path="/"
+          render={() => {
+            return (
+              <ProtectedRoute>
+                <Board />
+              </ProtectedRoute>
+            );
           }}
-        >
-          <Grid
-            container
-            sx={{
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <CircularProgress size="3rem" data-cy="loading-spinner" />
-          </Grid>
-        </Box>
-      </Modal>
+        />
+      </BrowserRouter>
+
+      {/* Loading modal */}
+      <Loading />
     </Grid>
   );
 }

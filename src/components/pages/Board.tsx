@@ -12,7 +12,7 @@ import React, { useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { lime, purple } from "@mui/material/colors";
 import { useSelector } from "react-redux";
-import { useSortItemsIntoColumns } from "../hooks/useSortIntoColumns";
+import { useSortItemsIntoColumns } from "../../hooks/useSortIntoColumns";
 
 const tasks = [
   { id: "1", content: "First task" },
@@ -89,6 +89,29 @@ function Board() {
         container
         sx={{ display: "flex", justifyContent: "center", width: "100%" }}
       >
+        <Typography
+          variant="h3"
+          color="primary"
+          sx={{
+            width: "100%",
+            textAlign: "center",
+            mt: 1,
+          }}
+        >
+          Todo list
+        </Typography>
+
+        <Typography
+          variant="h5"
+          color="primary"
+          sx={{
+            width: "100%",
+            textAlign: "center",
+            mt: 1,
+          }}
+        >
+          Please drag and drop your todos in the relevant columns
+        </Typography>
         {Object.entries(sortedColumns)?.map(([columnId, column], index) => {
           return (
             <Box
