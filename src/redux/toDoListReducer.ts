@@ -91,7 +91,7 @@ export const toDoListSlice = createSlice({
   initialState: {
     toDoList: data.todos,
     loading: false,
-    authenticated: true,
+    authenticated: false,
     showTodoModal: false,
     showDeleteModal: false,
     toDoModalColumn: "",
