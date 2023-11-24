@@ -5,6 +5,7 @@ import {
   CardActions,
   CardContent,
   Grid,
+  TextField,
   Typography,
   useTheme,
 } from "@mui/material";
@@ -19,6 +20,7 @@ import {
   setShowTodoModal,
 } from "../../redux/toDoListReducer";
 import { enqueueSnackbar } from "notistack";
+import Todo from "./Todo";
 
 const tasks = [
   { id: "1", content: "First task" },
@@ -177,55 +179,7 @@ function Board() {
                             index={index}
                           >
                             {(provided, snapshot) => {
-                              return (
-                                <Card
-                                  ref={provided.innerRef}
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
-                                  sx={{
-                                    maxWidth: 345,
-                                    alignSelf: "flex-start",
-                                    backgroundColor: "primary.light",
-                                    p: 1,
-                                  }}
-                                >
-                                  <CardContent>
-                                    <Typography
-                                      gutterBottom
-                                      variant="h5"
-                                      component="div"
-                                    >
-                                      {item.title}
-                                    </Typography>
-                                    <Typography
-                                      variant="body2"
-                                      color="text.secondary"
-                                    >
-                                      {item.details}
-                                    </Typography>
-                                  </CardContent>
-                                  <CardActions
-                                    sx={{
-                                      display: "flex",
-                                      justifyContent: "space-between",
-                                    }}
-                                  >
-                                    <Button size="small" variant="contained">
-                                      Edit
-                                    </Button>
-                                    <Button
-                                      size="small"
-                                      variant="contained"
-                                      color="secondary"
-                                      onClick={() =>
-                                        dispatch(setShowDeleteModal(true))
-                                      }
-                                    >
-                                      Delete
-                                    </Button>
-                                  </CardActions>
-                                </Card>
-                              );
+                              return <Todo provided={provided} item={item} />;
                             }}
                           </Draggable>
                         );

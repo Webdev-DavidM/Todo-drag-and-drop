@@ -11,7 +11,6 @@ import Board from "./components/pages/Board";
 import Loading from "./modals/Loading";
 import Login from "./components/pages/Login";
 import Signup from "./components/pages/Signup";
-import CheckLocalStorage from "./helpers/CheckLocalStorage";
 import ProtectedRoute from "./helpers/ProtectedRoute";
 import AddTodo from "./modals/AddTodo";
 import DeleteModal from "./modals/DeleteModal";

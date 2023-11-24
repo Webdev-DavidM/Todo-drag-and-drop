@@ -1,6 +1,5 @@
 import { useAppSelector, useAppDispatch } from "../hooks/hooks";
 import { useFormik } from "formik";
-import * as Yup from "yup";
 
 // Mui
 import {
@@ -18,6 +17,9 @@ import {
 // Store
 import { setShowTodoModal } from "../redux/toDoListReducer";
 
+// validationSchema
+import { validationSchema } from "../helpers/validationSchema";
+
 type Props = {
   column: string;
 };
@@ -33,10 +35,7 @@ function AddTodo({ column }: Props) {
   const formik = useFormik({
     initialValues: initialFieldValues,
     enableReinitialize: true,
-    validationSchema: Yup.object({
-      title: Yup.string().required("Title is required"),
-      details: Yup.string().required("Details is required"),
-    }),
+    validationSchema: validationSchema,
     onSubmit: (values) => {
       console.log(values);
     },
