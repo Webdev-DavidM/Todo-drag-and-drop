@@ -42,7 +42,7 @@ function AddTodo({ column }: Props) {
     },
   });
   return (
-    <Modal open={showTodoModal}>
+    <Modal open={true}>
       <form onSubmit={formik.handleSubmit}>
         <Box
           sx={{

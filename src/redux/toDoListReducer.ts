@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import data from "../todos.json";
+import { enqueueSnackbar } from "notistack";
 
 type Todo = {
   id: string;
@@ -15,6 +16,7 @@ type InitialState = {
   toDoList: Todo[] | [];
   authenticated: boolean;
   showTodoModal: boolean;
+  showDeleteModal: boolean;
   toDoModalColumn: string;
 };
 
@@ -87,10 +89,11 @@ export const signIn = createAsyncThunk(
 export const toDoListSlice = createSlice({
   name: "toDoList",
   initialState: {
-    loading: false,
     toDoList: data.todos,
+    loading: false,
     authenticated: true,
-    showTodoModal: true,
+    showTodoModal: false,
+    showDeleteModal: false,
     toDoModalColumn: "",
   } as InitialState,
   reducers: {
@@ -109,9 +112,18 @@ export const toDoListSlice = createSlice({
       state.toDoModalColumn = column;
       // state.showTodoModal = action.payload.showTodoModal;
     },
+    setShowDeleteModal: (state, action: PayloadAction<boolean>) => {
+      state.showDeleteModal = action.payload;
+
+      // state.showTodoModal = action.payload.showTodoModal;
+      enqueueSnackbar("Questions reordered successfully.", {
+        variant: "success",
+      });
+    },
   },
 });
 
-export const { setLoading, setShowTodoModal } = toDoListSlice.actions;
+export const { setLoading, setShowTodoModal, setShowDeleteModal } =
+  toDoListSlice.actions;
 
 export default toDoListSlice.reducer;

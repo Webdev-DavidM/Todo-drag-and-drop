@@ -14,7 +14,11 @@ import { lime, purple } from "@mui/material/colors";
 import { useSelector } from "react-redux";
 import { useSortItemsIntoColumns } from "../../hooks/useSortIntoColumns";
 import { useDispatch } from "react-redux";
-import { setShowTodoModal } from "../../redux/toDoListReducer";
+import {
+  setShowDeleteModal,
+  setShowTodoModal,
+} from "../../redux/toDoListReducer";
+import { enqueueSnackbar } from "notistack";
 
 const tasks = [
   { id: "1", content: "First task" },
@@ -213,6 +217,9 @@ function Board() {
                                       size="small"
                                       variant="contained"
                                       color="secondary"
+                                      onClick={() =>
+                                        dispatch(setShowDeleteModal(true))
+                                      }
                                     >
                                       Delete
                                     </Button>

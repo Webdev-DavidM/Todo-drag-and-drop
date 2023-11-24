@@ -5,6 +5,8 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import { blue, purple } from "@mui/material/colors";
 import { ThemeProvider, createTheme } from "@mui/material";
+import { SnackbarProvider } from "notistack";
+import { SnackBar } from "./components/SnackBar";
 
 const theme = createTheme({
   palette: {
@@ -29,7 +31,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <Provider store={store}>
     <ThemeProvider theme={theme}>
-      <App />
+      <SnackBar>
+        <App />
+      </SnackBar>
     </ThemeProvider>
   </Provider>
 );
