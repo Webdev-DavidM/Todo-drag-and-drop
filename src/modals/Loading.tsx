@@ -3,9 +3,8 @@ import React from "react";
 import { useAppSelector } from "../hooks/hooks";
 
 function Loading() {
-  const loading = useAppSelector((state) => state.toDoList.loading);
   return (
-    <Modal open={loading}>
+    <Modal open={true}>
       <Box
         sx={{
           position: "absolute",

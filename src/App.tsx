@@ -12,9 +12,14 @@ import Login from "./components/pages/Login";
 import Signup from "./components/pages/Signup";
 import CheckLocalStorage from "./helpers/CheckLocalStorage";
 import ProtectedRoute from "./helpers/ProtectedRoute";
+import AddTodo from "./modals/AddTodo";
 
 function App() {
   const toDos = useAppSelector((state) => state.toDoList.toDoList);
+  const loading = useAppSelector((state) => state.toDoList.loading);
+  const { showTodoModal } = useAppSelector((state) => state.toDoList);
+  const { toDoModalColumn } = useAppSelector((state) => state.toDoList);
+  console.log(loading);
 
   return (
     <Grid
@@ -47,9 +52,9 @@ function App() {
           }}
         />
       </BrowserRouter>
-
-      {/* Loading modal */}
-      <Loading />
+      {/* Modals */}
+      {loading && <Loading />}
+      {showTodoModal && toDoModalColumn && <AddTodo column={toDoModalColumn} />}
     </Grid>
   );
 }

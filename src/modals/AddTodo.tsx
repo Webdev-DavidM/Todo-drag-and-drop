@@ -1,9 +1,163 @@
-import React from "react";
+import { useAppSelector, useAppDispatch } from "../hooks/hooks";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
-type Props = {};
+// Mui
+import {
+  Box,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  Grid,
+  Modal,
+  TextField,
+  Typography,
+} from "@mui/material";
 
-function AddTodo({}: Props) {
-  return <div>AddTodo</div>;
+// Store
+import { setShowTodoModal } from "../redux/toDoListReducer";
+
+type Props = {
+  column: string;
+};
+
+function AddTodo({ column }: Props) {
+  const showTodoModal = useAppSelector((state) => state.toDoList.showTodoModal);
+  const dispatch = useAppDispatch();
+  let initialFieldValues = {
+    title: "",
+    details: "",
+  };
+
+  const formik = useFormik({
+    initialValues: initialFieldValues,
+    enableReinitialize: true,
+    validationSchema: Yup.object({
+      title: Yup.string().required("Title is required"),
+      details: Yup.string().required("Details is required"),
+    }),
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
+  return (
+    <Modal open={showTodoModal}>
+      <form onSubmit={formik.handleSubmit}>
+        <Box
+          sx={{
+            position: "absolute",
+            left: 0,
+            top: 0,
+            width: "100vw",
+            height: "100vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Grid
+            container
+            sx={{
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Card
+              sx={{
+                width: "50%",
+                alignSelf: "flex-start",
+
+                p: 1,
+                margin: "auto",
+              }}
+            >
+              <CardContent>
+                <Grid
+                  container
+                  justifyContent={"space-between"}
+                  alignItems={"center"}
+                  mb={2}
+                >
+                  <Typography variant="h6">Create your todo</Typography>
+                  <Button variant="contained" disabled={true}>
+                    {column}
+                  </Button>
+                </Grid>
+                <Typography gutterBottom variant="h6" component="div">
+                  Title
+                </Typography>
+                <TextField
+                  fullWidth
+                  size="small"
+                  name="title"
+                  placeholder="Enter a title for your todo"
+                  type="text"
+                  value={formik?.values?.title}
+                  onChange={formik.handleChange}
+                  error={formik.touched.title && Boolean(formik.errors.title)}
+                  helperText={formik.touched.title ? formik.errors.title : ""}
+                  sx={{
+                    "& legend": { display: "none" },
+                    "& fieldset": { top: 0 },
+                  }}
+                />
+
+                <Typography gutterBottom variant="h6" component="div" mt={2}>
+                  Description
+                </Typography>
+                <TextField
+                  fullWidth
+                  size="small"
+                  name="details"
+                  placeholder="Enter a description for your todo"
+                  type="text"
+                  value={formik?.values?.details}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.details && Boolean(formik.errors.details)
+                  }
+                  helperText={
+                    formik.touched.details ? formik.errors.details : ""
+                  }
+                  sx={{
+                    "& legend": { display: "none" },
+                    "& fieldset": { top: 0 },
+                  }}
+                />
+              </CardContent>
+              <CardActions
+                sx={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                }}
+              >
+                <Button size="small" variant="contained" type="submit">
+                  Save
+                </Button>
+                <Button
+                  size="small"
+                  variant="contained"
+                  color="secondary"
+                  onClick={() =>
+                    dispatch(
+                      setShowTodoModal({
+                        showTodoModal: false,
+                        column: "",
+                      })
+                    )
+                  }
+                >
+                  Cancel
+                </Button>
+              </CardActions>
+            </Card>
+          </Grid>
+        </Box>
+      </form>
+    </Modal>
+  );
 }
 
 export default AddTodo;

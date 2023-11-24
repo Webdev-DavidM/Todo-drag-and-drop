@@ -14,6 +14,8 @@ type InitialState = {
   loading: boolean;
   toDoList: Todo[] | [];
   authenticated: boolean;
+  showTodoModal: boolean;
+  toDoModalColumn: string;
 };
 
 // type UpdatedTodo = {
@@ -88,14 +90,28 @@ export const toDoListSlice = createSlice({
     loading: false,
     toDoList: data.todos,
     authenticated: true,
+    showTodoModal: true,
+    toDoModalColumn: "",
   } as InitialState,
   reducers: {
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
     },
+    setShowTodoModal: (
+      state,
+      action: PayloadAction<{
+        showTodoModal: boolean;
+        column: string;
+      }>
+    ) => {
+      const { column, showTodoModal } = action.payload;
+      state.showTodoModal = showTodoModal;
+      state.toDoModalColumn = column;
+      // state.showTodoModal = action.payload.showTodoModal;
+    },
   },
 });
 
-export const { setLoading } = toDoListSlice.actions;
+export const { setLoading, setShowTodoModal } = toDoListSlice.actions;
 
 export default toDoListSlice.reducer;

@@ -13,6 +13,8 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { lime, purple } from "@mui/material/colors";
 import { useSelector } from "react-redux";
 import { useSortItemsIntoColumns } from "../../hooks/useSortIntoColumns";
+import { useDispatch } from "react-redux";
+import { setShowTodoModal } from "../../redux/toDoListReducer";
 
 const tasks = [
   { id: "1", content: "First task" },
@@ -80,7 +82,8 @@ function Board() {
   const desktop = theme.breakpoints.up("lg");
   const toDos = useSelector((state: any) => state.toDoList.toDoList);
   const { sortedColumns } = useSortItemsIntoColumns(toDos);
-  console.log("sortedColumns", sortedColumns);
+  const dispatch = useDispatch();
+
   return (
     <DragDropContext
       onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
@@ -107,7 +110,6 @@ function Board() {
           sx={{
             width: "100%",
             textAlign: "center",
-            mt: 1,
           }}
         >
           Please drag and drop your todos in the relevant columns
@@ -126,7 +128,24 @@ function Board() {
               }}
               key={columnId}
             >
-              <Typography variant="h5">{column.name}</Typography>
+              <Grid container justifyContent={"space-between"} px={2}>
+                <Typography variant="h5">{column.name}</Typography>
+                <Button
+                  size="small"
+                  variant="contained"
+                  color="primary"
+                  onClick={() =>
+                    dispatch(
+                      setShowTodoModal({
+                        showTodoModal: true,
+                        column: columnId,
+                      })
+                    )
+                  }
+                >
+                  Add todo
+                </Button>
+              </Grid>
 
               <Droppable droppableId={columnId} key={columnId}>
                 {(provided, snapshot) => {
@@ -162,7 +181,7 @@ function Board() {
                                   sx={{
                                     maxWidth: 345,
                                     alignSelf: "flex-start",
-                                    backgroundColor: lime[50],
+                                    backgroundColor: "primary.light",
                                     p: 1,
                                   }}
                                 >
@@ -190,7 +209,11 @@ function Board() {
                                     <Button size="small" variant="contained">
                                       Edit
                                     </Button>
-                                    <Button size="small" variant="contained">
+                                    <Button
+                                      size="small"
+                                      variant="contained"
+                                      color="secondary"
+                                    >
                                       Delete
                                     </Button>
                                   </CardActions>
