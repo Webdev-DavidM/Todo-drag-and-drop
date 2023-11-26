@@ -12,13 +12,18 @@ import { useFormik } from "formik";
 
 // validationSchema
 import { validationSchema } from "../../helpers/validationSchema";
-import { setDeleteId, setShowDeleteModal } from "../../redux/toDoListReducer";
+import {
+  setDeleteId,
+  setShowDeleteModal,
+  updateToDo,
+} from "../../redux/toDoListReducer";
 
 type Props = {
   item: {
     title: string;
     details: string;
     id: string;
+    column: string;
   };
   provided: any;
 };
@@ -31,15 +36,20 @@ const Todo = ({ item, provided }: Props) => {
   };
   const [edit, setEdit] = useState(false);
 
-  console.log(item.id);
-
   const formik = useFormik({
     initialValues: initialFieldValues,
     enableReinitialize: true,
     validationSchema: validationSchema,
     onSubmit: (values) => {
       console.log(values);
-
+      dispatch(
+        updateToDo({
+          id: item.id,
+          title: values.title,
+          details: values.details,
+          column: item.column,
+        })
+      );
       // after succesful backend call
       setEdit(false);
     },

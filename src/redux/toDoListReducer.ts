@@ -70,22 +70,16 @@ export const deleteToDo: any = createAsyncThunk<any>(
 
 export const updateToDo = createAsyncThunk(
   "toDoList/updateToDo",
-  async (updatedTodo: {}, { dispatch, getState }) => {
-    // const state: InitialState[] | [] = getState();
+  async (updatedTodo: Todo, { dispatch, getState }) => {
+    try {
+      const updatedTodos = await axios.put("http://localhost:5000/todos", {
+        todo: updatedTodo,
+      });
+      return updatedTodos;
+    } catch {
+      console.error("err");
+    }
   }
-
-  //   console.log("place", place);
-  //   try {
-  //     const topFive = await axios.post("http://localhost:4000/topFivePlaces", {
-  //       place: `${place}`,
-  //     });
-  //     console.log("topFive", topFive);
-
-  //     return topFive;
-  //   } catch {
-  //     console.error("err");
-  //   }
-  // }
 );
 export const signUp = createAsyncThunk(
   "toDoList/signUp",
@@ -158,9 +152,6 @@ export const toDoListSlice = createSlice({
       state.showDeleteModal = action.payload;
 
       // state.showTodoModal = action.payload.showTodoModal;
-      enqueueSnackbar("Questions reordered successfully.", {
-        variant: "success",
-      });
     },
     setDeleteId: (state, action: PayloadAction<string>) => {
       state.deleteId = action.payload;
@@ -174,21 +165,16 @@ export const toDoListSlice = createSlice({
       })
       .addCase(getAllToDo.fulfilled, (state, action) => {
         state.loading = false;
-
         const allToDos = action.payload.data;
-        console.log("allToDos", allToDos);
         state.toDoList = allToDos;
+        enqueueSnackbar("Todo list loaded successfully", {
+          variant: "success",
+        });
       })
       .addCase(getAllToDo.rejected, (state, action) => {
-        // const { requestId } = action.meta;
-        // if (
-        //   state.loading === 'pending' &&
-        //   state.currentRequestId === requestId
-        // ) {
-        //   state.loading = 'idle'
-        //   state.error = action.error
-        //   state.currentRequestId = undefined
-        // }
+        enqueueSnackbar("Could not get your todo list", {
+          variant: "warning",
+        });
       });
     // deleteToDo
     builder
@@ -199,19 +185,15 @@ export const toDoListSlice = createSlice({
         state.loading = false;
 
         const allToDos = action.payload.data;
-        console.log("allToDos", allToDos);
         state.toDoList = allToDos;
+        enqueueSnackbar("Todo deleted successfully", {
+          variant: "success",
+        });
       })
       .addCase(deleteToDo.rejected, (state, action) => {
-        // const { requestId } = action.meta;
-        // if (
-        //   state.loading === 'pending' &&
-        //   state.currentRequestId === requestId
-        // ) {
-        //   state.loading = 'idle'
-        //   state.error = action.error
-        //   state.currentRequestId = undefined
-        // }
+        enqueueSnackbar("Todo could not be deleted", {
+          variant: "warning",
+        });
       });
     // createToDo
     builder
@@ -220,21 +202,36 @@ export const toDoListSlice = createSlice({
       })
       .addCase(createToDo.fulfilled, (state, action) => {
         state.loading = false;
-
+        enqueueSnackbar("Todo created and saved.", {
+          variant: "success",
+        });
         const allToDos = action.payload.data;
-        console.log("allToDos", allToDos);
         state.toDoList = allToDos;
       })
       .addCase(createToDo.rejected, (state, action) => {
-        // const { requestId } = action.meta;
-        // if (
-        //   state.loading === 'pending' &&
-        //   state.currentRequestId === requestId
-        // ) {
-        //   state.loading = 'idle'
-        //   state.error = action.error
-        //   state.currentRequestId = undefined
-        // }
+        enqueueSnackbar("Todo could not be saved", {
+          variant: "warning",
+        });
+      });
+    // updateToDo
+    builder
+      .addCase(updateToDo.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(updateToDo.fulfilled, (state, action) => {
+        state.loading = false;
+        enqueueSnackbar("Todo updated and saved.", {
+          variant: "success",
+        });
+        console.log("action.payload.data", action.payload);
+        const allToDos = action?.payload?.data;
+
+        state.toDoList = allToDos;
+      })
+      .addCase(updateToDo.rejected, (state, action) => {
+        enqueueSnackbar("Todo could not be saved", {
+          variant: "warning",
+        });
       });
   },
 });

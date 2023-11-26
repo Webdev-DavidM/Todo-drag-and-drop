@@ -12,7 +12,6 @@ type ColumnType = {
 
 export const useSortItemsIntoColumns = () => {
   const toDos = useSelector((state: any) => state.toDoList.toDoList);
-  console.log("toDos", toDos);
   const [sortedColumns, setSortedColumns] = useState<ColumnType>({
     toDo: {
       name: Columns.TO_DO,
