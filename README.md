@@ -18,14 +18,20 @@ https://github.com/Webdev-DavidM/Todo-drag-and-drop/assets/56081000/f7670bff-e09
 5) Creat testing with jest and react testing library which would include the following tests
    
 i)If the user is not logged in they are taken to the login screen
+
 ii)If their login is unsucessfult they get a message saying “login unsuccessful
+
 iii) If they try to go directly to the board route without authentication they are sent back to the log in screen
+
 iv) If the user deletes an item, it will not show in the ui anymore
+
 If the user edits a todo and save the ui is updated 
+
 v) If you click edit the field changes from to become editable
-Create
+
 vi) If I create a todo it shows in the ui
-viiIf I put a array into this hook it will return an object sorted into columns
+
+vii)If I put a array into this hook it will return an object sorted into columns
 
 
 
