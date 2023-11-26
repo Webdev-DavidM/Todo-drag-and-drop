@@ -1,4 +1,5 @@
 
+https://github.com/Webdev-DavidM/Todo-drag-and-drop/assets/56081000/f7670bff-e097-4039-9a5c-dc837902958a
 
 **Key feature**
 
@@ -15,7 +16,7 @@
 3) Create a login and sign up so the protected route can work
 4) Show the saved board for a selected user
 5) Creat testing with jest and react testing library which would include the following tests
-   Login 
+   
 i)If the user is not logged in they are taken to the login screen
 ii)If their login is unsucessfult they get a message saying “login unsuccessful
 iii) If they try to go directly to the board route without authentication they are sent back to the log in screen
