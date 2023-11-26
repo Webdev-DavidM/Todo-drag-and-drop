@@ -1,4 +1,4 @@
-![image](https://github.com/Webdev-DavidM/Todo-drag-and-drop/assets/56081000/e0925daa-88ab-4697-90c6-f7cbfde57259)
+
 
 **Key feature**
 
