@@ -1,3 +1,5 @@
+![image](https://github.com/Webdev-DavidM/Todo-drag-and-drop/assets/56081000/e0925daa-88ab-4697-90c6-f7cbfde57259)
+
 **Key feature**
 
 1) Typescript
@@ -24,7 +26,7 @@ Create
 vi) If I create a todo it shows in the ui
 viiIf I put a array into this hook it will return an object sorted into columns
 
-![image](https://github.com/Webdev-DavidM/Todo-drag-and-drop/assets/56081000/e0925daa-88ab-4697-90c6-f7cbfde57259)
+
 
 
 
