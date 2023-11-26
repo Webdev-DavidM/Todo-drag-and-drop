@@ -1,46 +1,43 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+https://github.com/Webdev-DavidM/Todo-drag-and-drop/assets/56081000/f7670bff-e097-4039-9a5c-dc837902958a
 
-## Available Scripts
+**Key feature**
 
-In the project directory, you can run:
+1) Typescript
+2) Drag and drop kanban style to do list
+3) Custom hooks
+4) React redux
+5) Material Ui
+6) Toast pop up for successful saves to the server
 
-### `yarn start`
+**Still to do**
+1) Fix the glitch when items are dragged
+2) Improve the UI styling
+3) Add JWT to authorise changing the todos
+4) Host the react app on aws s3 and the backend via serverless framework to a api lambda proxy
+5) Add a ci/cd pipeline to automatically deploy once tests are passed via github to s3
+6) Create a login and sign up so the protected route can work
+7) Show the saved board for a selected user
+8) Creat testing with jest and react testing library which would include the following tests
+   
+i)If the user is not logged in they are taken to the login screen
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+ii)If their login is unsucessfult they get a message saying “login unsuccessful
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+iii) If they try to go directly to the board route without authentication they are sent back to the log in screen
 
-### `yarn test`
+iv) If the user deletes an item, it will not show in the ui anymore
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+If the user edits a todo and save the ui is updated 
 
-### `yarn build`
+v) If you click edit the field changes from to become editable
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+vi) If I create a todo it shows in the ui
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+vii)If I put a array into this hook it will return an object sorted into columns
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
