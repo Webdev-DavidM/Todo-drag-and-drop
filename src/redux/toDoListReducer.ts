@@ -1,9 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
-import data from "../todos.json";
 import { enqueueSnackbar } from "notistack";
-import { get } from "http";
 
 type Todo = {
   id: string;
@@ -21,12 +19,6 @@ type InitialState = {
   toDoModalColumn: string;
   deleteId: string;
 };
-
-// type UpdatedTodo = {
-//   id: number;
-//   title: string;
-//   completed: boolean;
-// };
 
 export const getAllToDo: any = createAsyncThunk<any>(
   "toDoList/getAllToDo",
@@ -83,41 +75,11 @@ export const updateToDo = createAsyncThunk(
 );
 export const signUp = createAsyncThunk(
   "toDoList/signUp",
-  async (updatedTodo, { dispatch, getState }) => {
-    // const state: InitialState[] | [] = getState();
-  }
-
-  //   console.log("place", place);
-  //   try {
-  //     const topFive = await axios.post("http://localhost:4000/topFivePlaces", {
-  //       place: `${place}`,
-  //     });
-  //     console.log("topFive", topFive);
-
-  //     return topFive;
-  //   } catch {
-  //     console.error("err");
-  //   }
-  // }
+  async (updatedTodo, { dispatch, getState }) => {}
 );
 export const signIn = createAsyncThunk(
   "toDoList/signIn",
-  async (updatedTodo, { dispatch, getState }) => {
-    // const state: InitialState[] | [] = getState();
-  }
-
-  //   console.log("place", place);
-  //   try {
-  //     const topFive = await axios.post("http://localhost:4000/topFivePlaces", {
-  //       place: `${place}`,
-  //     });
-  //     console.log("topFive", topFive);
-
-  //     return topFive;
-  //   } catch {
-  //     console.error("err");
-  //   }
-  // }
+  async (updatedTodo, { dispatch, getState }) => {}
 );
 
 export const toDoListSlice = createSlice({
@@ -146,12 +108,9 @@ export const toDoListSlice = createSlice({
       const { column, showTodoModal } = action.payload;
       state.showTodoModal = showTodoModal;
       state.toDoModalColumn = column;
-      // state.showTodoModal = action.payload.showTodoModal;
     },
     setShowDeleteModal: (state, action: PayloadAction<boolean>) => {
       state.showDeleteModal = action.payload;
-
-      // state.showTodoModal = action.payload.showTodoModal;
     },
     setDeleteId: (state, action: PayloadAction<string>) => {
       state.deleteId = action.payload;

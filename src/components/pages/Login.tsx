@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   Card,
   CardContent,
@@ -8,7 +7,6 @@ import {
   Typography,
 } from "@mui/material";
 import { useFormik } from "formik";
-import React from "react";
 import * as Yup from "yup";
 
 type Props = {};

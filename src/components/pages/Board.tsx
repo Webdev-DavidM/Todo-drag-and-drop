@@ -1,12 +1,7 @@
 import { Box, Button, Grid, Typography, useTheme } from "@mui/material";
-import { useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { useDispatch } from "react-redux";
-import {
-  getAllToDo,
-  setShowTodoModal,
-  updateToDo,
-} from "../../redux/toDoListReducer";
+import { setShowTodoModal, updateToDo } from "../../redux/toDoListReducer";
 import { useSelector } from "react-redux";
 
 // Custom hook
@@ -15,96 +10,12 @@ import { useSortItemsIntoColumns } from "../../hooks/useSortIntoColumns";
 // Components
 import Todo from "./Todo";
 
-// Types
-// import { Todo } from "../../types";
-
-// const onDragEnd = (result: any, columns: any, setColumns: any, toDos: any) => {
-//   if (!result.destination) return;
-//   const { source, destination } = result;
-
-//   // updates the column value of the todo to a value the server will understand
-//   const sourceColumn = (source: any) => {
-//     switch (source.droppableId) {
-//       case "toDo":
-//         return "To do";
-//       case "inProgress":
-//         return "In Progress";
-//       case "done":
-//         return "Done";
-//       default:
-//         return;
-//     }
-//   };
-
-//   let itemToMove = toDos.filter((item: any) => {
-//     return item.column === sourceColumn(source);
-//   });
-//   itemToMove = itemToMove[source.index];
-//   const columnToMoveTo = sourceColumn(destination);
-//   console.log(itemToMove);
-//   console.log(destination);
-//   console.log(columnToMoveTo);
-
-//   const updatedItem = {
-//     ...itemToMove,
-//     column: columnToMoveTo,
-//   };
-//   dispatch(updateToDo(updatedItem))
-
-//   if (source.droppableId !== destination.droppableId) {
-//     const sourceColumn = columns[source.droppableId];
-
-//     const destColumn = columns[destination.droppableId];
-
-//     const sourceItems = [...sourceColumn.items];
-
-//     const destItems = [...destColumn.items];
-
-//     const [removed] = sourceItems.splice(source.index, 1);
-
-//     destItems.splice(destination.index, 0, removed);
-
-//     // the todo to move is from
-
-//     // in progress value so i know where to put the item
-
-//     setColumns({
-//       ...columns,
-//       [source.droppableId]: {
-//         ...sourceColumn,
-//         items: sourceItems,
-//       },
-//       [destination.droppableId]: {
-//         ...destColumn,
-//         items: destItems,
-//       },
-//     });
-//   } else {
-//     const column = columns[source.droppableId];
-//     const copiedItems = [...column.items];
-//     const [removed] = copiedItems.splice(source.index, 1);
-//     copiedItems.splice(destination.index, 0, removed);
-//     setColumns({
-//       ...columns,
-//       [source.droppableId]: {
-//         ...column,
-//         items: copiedItems,
-//       },
-//     });
-//   }
-// };
-
 function Board() {
-  const [columns, setColumns] = useState(
-    useSortItemsIntoColumns().sortedColumns
-  );
-  const theme = useTheme();
-  const desktop = theme.breakpoints.up("lg");
   const { sortedColumns } = useSortItemsIntoColumns();
   const todos = useSelector((state: any) => state.toDoList.toDoList);
   const dispatch = useDispatch();
 
-  const onDragEnd = (result: any, columns: any, setColumns: any) => {
+  const onDragEnd = (result: any) => {
     if (!result.destination) return;
     const { source, destination } = result;
 
@@ -127,65 +38,15 @@ function Board() {
     });
     itemToMove = itemToMove[source.index];
     const columnToMoveTo = sourceColumn(destination);
-    console.log(itemToMove);
-    console.log(destination);
-    console.log(columnToMoveTo);
-
     const updatedItem = {
       ...itemToMove,
       column: columnToMoveTo,
     };
-    const updatedItems = dispatch(updateToDo(updatedItem));
-
-    // setColumns(useSortItemsIntoColumns);
-
-    // if (source.droppableId !== destination.droppableId) {
-    //   const sourceColumn = columns[source.droppableId];
-
-    //   const destColumn = columns[destination.droppableId];
-
-    //   const sourceItems = [...sourceColumn.items];
-
-    //   const destItems = [...destColumn.items];
-
-    //   const [removed] = sourceItems.splice(source.index, 1);
-
-    //   destItems.splice(destination.index, 0, removed);
-
-    //   // the todo to move is from
-
-    //   // in progress value so i know where to put the item
-
-    //   setColumns({
-    //     ...columns,
-    //     [source.droppableId]: {
-    //       ...sourceColumn,
-    //       items: sourceItems,
-    //     },
-    //     [destination.droppableId]: {
-    //       ...destColumn,
-    //       items: destItems,
-    //     },
-    //   });
-    // } else {
-    //   const column = columns[source.droppableId];
-    //   const copiedItems = [...column.items];
-    //   const [removed] = copiedItems.splice(source.index, 1);
-    //   copiedItems.splice(destination.index, 0, removed);
-    //   setColumns({
-    //     ...columns,
-    //     [source.droppableId]: {
-    //       ...column,
-    //       items: copiedItems,
-    //     },
-    //   });
-    // }
+    dispatch(updateToDo(updatedItem));
   };
 
   return (
-    <DragDropContext
-      onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
-    >
+    <DragDropContext onDragEnd={(result) => onDragEnd(result)}>
       <Grid
         container
         sx={{ display: "flex", justifyContent: "center", width: "100%" }}

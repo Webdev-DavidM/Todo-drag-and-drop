@@ -1,17 +1,16 @@
 // Store
 import { useAppDispatch, useAppSelector } from "./hooks/hooks";
-import { BrowserRouter, Route, Link } from "react-router-dom";
-import { SnackbarProvider, enqueueSnackbar } from "notistack";
+import { BrowserRouter, Route } from "react-router-dom";
 
 // Mui
-import { Button, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 
 // Components
 import Board from "./components/pages/Board";
 import Loading from "./modals/Loading";
 import Login from "./components/pages/Login";
 import Signup from "./components/pages/Signup";
-import ProtectedRoute from "./helpers/ProtectedRoute";
+// import ProtectedRoute from "./helpers/ProtectedRoute";
 import AddTodo from "./modals/AddTodo";
 import DeleteModal from "./modals/DeleteModal";
 import { getAllToDo } from "./redux/toDoListReducer";
@@ -42,9 +41,6 @@ function App() {
         flexDirection: "column",
       }}
     >
-      {/* // need to fix this statement below */}
-      {/* {!loading && toDos?.length === 0 && <Board />} */}
-
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Route exact path="/login" render={() => <Login />} />
         <Route exact path="/signup" render={() => <Signup />} />
@@ -53,9 +49,9 @@ function App() {
           path="/"
           render={() => {
             return (
-              <ProtectedRoute>
-                <Board />
-              </ProtectedRoute>
+              // <ProtectedRoute>
+              <Board />
+              // </ProtectedRoute>
             );
           }}
         />
