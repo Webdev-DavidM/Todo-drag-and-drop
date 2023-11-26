@@ -8,7 +8,7 @@ https://github.com/Webdev-DavidM/Todo-drag-and-drop/assets/56081000/f7670bff-e09
 3) Custom hooks
 4) React redux
 5) Material Ui
-6) Toast pop up for sucessful saves to the server
+6) Toast pop up for successful saves to the server
 
 **Still to do**
 1) Fix the glitch when items are dragged
