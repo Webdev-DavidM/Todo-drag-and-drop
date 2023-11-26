@@ -14,10 +14,11 @@ https://github.com/Webdev-DavidM/Todo-drag-and-drop/assets/56081000/f7670bff-e09
 1) Fix the glitch when items are dragged
 2) Improve the UI styling
 3) Add JWT to authorise changing the todos
-4) Add a ci/cd pipeline to automatically deploy once tests are passed via github to s3
-5) Create a login and sign up so the protected route can work
-6) Show the saved board for a selected user
-7) Creat testing with jest and react testing library which would include the following tests
+4) Host the react app on aws s3 and the backend via serverless framework to a api lambda proxy
+5) Add a ci/cd pipeline to automatically deploy once tests are passed via github to s3
+6) Create a login and sign up so the protected route can work
+7) Show the saved board for a selected user
+8) Creat testing with jest and react testing library which would include the following tests
    
 i)If the user is not logged in they are taken to the login screen
 
