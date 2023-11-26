@@ -12,10 +12,11 @@ https://github.com/Webdev-DavidM/Todo-drag-and-drop/assets/56081000/f7670bff-e09
 
 **Still to do**
 1) Fix the glitch when items are dragged
-2) Add a ci/cd pipeline to automatically deploy once tests are passed via github to s3
-3) Create a login and sign up so the protected route can work
-4) Show the saved board for a selected user
-5) Creat testing with jest and react testing library which would include the following tests
+2) Improve the UI styling
+3) Add a ci/cd pipeline to automatically deploy once tests are passed via github to s3
+4) Create a login and sign up so the protected route can work
+5) Show the saved board for a selected user
+6) Creat testing with jest and react testing library which would include the following tests
    
 i)If the user is not logged in they are taken to the login screen
 
