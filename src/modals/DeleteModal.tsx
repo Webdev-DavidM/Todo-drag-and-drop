@@ -14,12 +14,17 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { setShowDeleteModal } from "../redux/toDoListReducer";
+import {
+  deleteToDo,
+  setDeleteId,
+  setShowDeleteModal,
+} from "../redux/toDoListReducer";
 
 // Store
 
 function DeleteModal() {
   const dispatch = useAppDispatch();
+  const deleteId = useAppSelector((state) => state.toDoList.deleteId);
 
   return (
     <Modal open={true}>
@@ -63,14 +68,26 @@ function DeleteModal() {
                 justifyContent: "flex-end",
               }}
             >
-              <Button size="small" variant="contained" type="submit">
+              <Button
+                size="small"
+                variant="contained"
+                type="submit"
+                onClick={() => {
+                  dispatch(setShowDeleteModal(false));
+                  dispatch(deleteToDo(deleteId));
+                  dispatch(setDeleteId(""));
+                }}
+              >
                 Delete
               </Button>
               <Button
                 size="small"
                 variant="contained"
                 color="secondary"
-                onClick={() => dispatch(setShowDeleteModal(false))}
+                onClick={() => {
+                  dispatch(setDeleteId(""));
+                  dispatch(setShowDeleteModal(false));
+                }}
               >
                 Cancel
               </Button>

@@ -3,6 +3,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import data from "../todos.json";
 import { enqueueSnackbar } from "notistack";
+import { get } from "http";
 
 type Todo = {
   id: string;
@@ -18,6 +19,7 @@ type InitialState = {
   showTodoModal: boolean;
   showDeleteModal: boolean;
   toDoModalColumn: string;
+  deleteId: string;
 };
 
 // type UpdatedTodo = {
@@ -42,8 +44,22 @@ export const createToDo: any = createAsyncThunk<any>(
   "toDoList/createToDo",
   async (todo: any, { dispatch, getState }) => {
     try {
-      const newTodo = await axios.post("http://localhost:5000/todos", {
+      const updatedTodos = await axios.post("http://localhost:5000/todos", {
         todo,
+      });
+      return updatedTodos;
+    } catch {
+      console.error("err");
+    }
+  }
+);
+
+export const deleteToDo: any = createAsyncThunk<any>(
+  "toDoList/deleteToDo",
+  async (deleteId: any, { dispatch, getState }) => {
+    try {
+      const newTodo = await axios.delete("http://localhost:5000/todos", {
+        data: { id: deleteId },
       });
       return newTodo;
     } catch {
@@ -118,6 +134,7 @@ export const toDoListSlice = createSlice({
     authenticated: true,
     showTodoModal: false,
     showDeleteModal: false,
+    deleteId: "",
     toDoModalColumn: "",
   } as InitialState,
   reducers: {
@@ -145,9 +162,12 @@ export const toDoListSlice = createSlice({
         variant: "success",
       });
     },
+    setDeleteId: (state, action: PayloadAction<string>) => {
+      state.deleteId = action.payload;
+    },
   },
   extraReducers: (builder) => {
-    // createTodo
+    // getAllToDo
     builder
       .addCase(getAllToDo.pending, (state, action) => {
         state.loading = true;
@@ -170,6 +190,30 @@ export const toDoListSlice = createSlice({
         //   state.currentRequestId = undefined
         // }
       });
+    // deleteToDo
+    builder
+      .addCase(deleteToDo.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(deleteToDo.fulfilled, (state, action) => {
+        state.loading = false;
+
+        const allToDos = action.payload.data;
+        console.log("allToDos", allToDos);
+        state.toDoList = allToDos;
+      })
+      .addCase(deleteToDo.rejected, (state, action) => {
+        // const { requestId } = action.meta;
+        // if (
+        //   state.loading === 'pending' &&
+        //   state.currentRequestId === requestId
+        // ) {
+        //   state.loading = 'idle'
+        //   state.error = action.error
+        //   state.currentRequestId = undefined
+        // }
+      });
+    // createToDo
     builder
       .addCase(createToDo.pending, (state, action) => {
         state.loading = true;
@@ -195,7 +239,7 @@ export const toDoListSlice = createSlice({
   },
 });
 
-export const { setLoading, setShowTodoModal, setShowDeleteModal } =
+export const { setLoading, setShowTodoModal, setShowDeleteModal, setDeleteId } =
   toDoListSlice.actions;
 
 export default toDoListSlice.reducer;

@@ -12,11 +12,13 @@ import { useFormik } from "formik";
 
 // validationSchema
 import { validationSchema } from "../../helpers/validationSchema";
+import { setDeleteId, setShowDeleteModal } from "../../redux/toDoListReducer";
 
 type Props = {
   item: {
     title: string;
     details: string;
+    id: string;
   };
   provided: any;
 };
@@ -28,6 +30,8 @@ const Todo = ({ item, provided }: Props) => {
     details: item.details,
   };
   const [edit, setEdit] = useState(false);
+
+  console.log(item.id);
 
   const formik = useFormik({
     initialValues: initialFieldValues,
@@ -137,7 +141,10 @@ const Todo = ({ item, provided }: Props) => {
             size="small"
             variant="contained"
             color="secondary"
-            //   onClick={() => dispatch(setShowDeleteModal(true))}
+            onClick={() => {
+              dispatch(setDeleteId(item.id));
+              dispatch(setShowDeleteModal(true));
+            }}
           >
             Delete
           </Button>

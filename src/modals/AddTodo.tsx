@@ -1,5 +1,6 @@
 import { useAppSelector, useAppDispatch } from "../hooks/hooks";
 import { useFormik } from "formik";
+import { v4 as uuidv4 } from "uuid";
 
 // Mui
 import {
@@ -39,8 +40,9 @@ function AddTodo({ column }: Props) {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       const { title, details } = values;
+
       if (title && details) {
-        const id = 1;
+        const id = uuidv4();
         const todo = {
           id: id,
           title,
@@ -55,11 +57,6 @@ function AddTodo({ column }: Props) {
         );
         dispatch(createToDo(todo));
       }
-      // const todo = {
-
-      //     title: values.title;
-      //     details: values.details;
-      //   }
     },
   });
   return (
