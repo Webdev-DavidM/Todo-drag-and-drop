@@ -16,6 +16,7 @@ import {
 
 // Store
 import { setShowTodoModal } from "../redux/toDoListReducer";
+import { createToDo } from "../redux/toDoListReducer";
 
 // validationSchema
 import { validationSchema } from "../helpers/validationSchema";
@@ -37,7 +38,28 @@ function AddTodo({ column }: Props) {
     enableReinitialize: true,
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log(values);
+      const { title, details } = values;
+      if (title && details) {
+        const id = 1;
+        const todo = {
+          id: id,
+          title,
+          details,
+          column,
+        };
+        dispatch(
+          setShowTodoModal({
+            showTodoModal: false,
+            column: "",
+          })
+        );
+        dispatch(createToDo(todo));
+      }
+      // const todo = {
+
+      //     title: values.title;
+      //     details: values.details;
+      //   }
     },
   });
   return (

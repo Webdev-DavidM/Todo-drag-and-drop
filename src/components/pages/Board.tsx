@@ -22,28 +22,28 @@ import {
 import { enqueueSnackbar } from "notistack";
 import Todo from "./Todo";
 
-const tasks = [
-  { id: "1", content: "First task" },
-  { id: "2", content: "Second task" },
-  { id: "3", content: "Third task" },
-  { id: "4", content: "Fourth task" },
-  { id: "5", content: "Fifth task" },
-];
+// const tasks = [
+//   { id: "1", content: "First task" },
+//   { id: "2", content: "Second task" },
+//   { id: "3", content: "Third task" },
+//   { id: "4", content: "Fourth task" },
+//   { id: "5", content: "Fifth task" },
+// ];
 
-const taskStatus = {
-  toDo: {
-    name: "To do",
-    items: tasks,
-  },
-  inProgress: {
-    name: "In Progress",
-    items: [],
-  },
-  done: {
-    name: "Done",
-    items: [],
-  },
-};
+// const taskStatus = {
+//   toDo: {
+//     name: "To do",
+//     items: tasks,
+//   },
+//   inProgress: {
+//     name: "In Progress",
+//     items: [],
+//   },
+//   done: {
+//     name: "Done",
+//     items: [],
+//   },
+// };
 
 const onDragEnd = (result: any, columns: any, setColumns: any) => {
   if (!result.destination) return;
@@ -83,11 +83,15 @@ const onDragEnd = (result: any, columns: any, setColumns: any) => {
 };
 
 function Board() {
-  const [columns, setColumns] = useState(taskStatus);
+  const [columns, setColumns] = useState(
+    useSortItemsIntoColumns().sortedColumns
+  );
   const theme = useTheme();
   const desktop = theme.breakpoints.up("lg");
-  const toDos = useSelector((state: any) => state.toDoList.toDoList);
-  const { sortedColumns } = useSortItemsIntoColumns(toDos);
+
+  const { sortedColumns } = useSortItemsIntoColumns();
+  console.log("sortedColumns", sortedColumns);
+  console.log("columns", columns);
   const dispatch = useDispatch();
 
   return (
@@ -144,7 +148,7 @@ function Board() {
                     dispatch(
                       setShowTodoModal({
                         showTodoModal: true,
-                        column: columnId,
+                        column: column.name,
                       })
                     )
                   }
@@ -171,7 +175,6 @@ function Board() {
                       }}
                     >
                       {column?.items?.map((item, index) => {
-                        console.log("item", typeof item.id);
                         return (
                           <Draggable
                             key={item.id}

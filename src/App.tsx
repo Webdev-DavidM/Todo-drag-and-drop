@@ -1,5 +1,5 @@
 // Store
-import { useAppSelector } from "./hooks/hooks";
+import { useAppDispatch, useAppSelector } from "./hooks/hooks";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import { SnackbarProvider, enqueueSnackbar } from "notistack";
 
@@ -14,14 +14,19 @@ import Signup from "./components/pages/Signup";
 import ProtectedRoute from "./helpers/ProtectedRoute";
 import AddTodo from "./modals/AddTodo";
 import DeleteModal from "./modals/DeleteModal";
+import { getAllToDo } from "./redux/toDoListReducer";
+import { useEffect } from "react";
 
 function App() {
-  const toDos = useAppSelector((state) => state.toDoList.toDoList);
   const loading = useAppSelector((state) => state.toDoList.loading);
   const { showTodoModal } = useAppSelector((state) => state.toDoList);
   const { toDoModalColumn } = useAppSelector((state) => state.toDoList);
   const { showDeleteModal } = useAppSelector((state) => state.toDoList);
-  console.log(loading);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getAllToDo());
+  }, []);
 
   return (
     <Grid

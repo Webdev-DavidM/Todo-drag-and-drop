@@ -26,11 +26,35 @@ type InitialState = {
 //   completed: boolean;
 // };
 
-console.log("todos", data.todos);
+export const getAllToDo: any = createAsyncThunk<any>(
+  "toDoList/getAllToDo",
+  async (_, { dispatch, getState }) => {
+    try {
+      const allTodos = await axios.get("http://localhost:5000/todos");
+      return allTodos;
+    } catch {
+      console.error("err");
+    }
+  }
+);
+
+export const createToDo: any = createAsyncThunk<any>(
+  "toDoList/createToDo",
+  async (todo: any, { dispatch, getState }) => {
+    try {
+      const newTodo = await axios.post("http://localhost:5000/todos", {
+        todo,
+      });
+      return newTodo;
+    } catch {
+      console.error("err");
+    }
+  }
+);
 
 export const updateToDo = createAsyncThunk(
   "toDoList/updateToDo",
-  async (updatedTodo, { dispatch, getState }) => {
+  async (updatedTodo: {}, { dispatch, getState }) => {
     // const state: InitialState[] | [] = getState();
   }
 
@@ -89,9 +113,9 @@ export const signIn = createAsyncThunk(
 export const toDoListSlice = createSlice({
   name: "toDoList",
   initialState: {
-    toDoList: data.todos,
+    toDoList: [],
     loading: false,
-    authenticated: false,
+    authenticated: true,
     showTodoModal: false,
     showDeleteModal: false,
     toDoModalColumn: "",
@@ -100,6 +124,7 @@ export const toDoListSlice = createSlice({
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
     },
+
     setShowTodoModal: (
       state,
       action: PayloadAction<{
@@ -120,6 +145,53 @@ export const toDoListSlice = createSlice({
         variant: "success",
       });
     },
+  },
+  extraReducers: (builder) => {
+    // createTodo
+    builder
+      .addCase(getAllToDo.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(getAllToDo.fulfilled, (state, action) => {
+        state.loading = false;
+
+        const allToDos = action.payload.data;
+        console.log("allToDos", allToDos);
+        state.toDoList = allToDos;
+      })
+      .addCase(getAllToDo.rejected, (state, action) => {
+        // const { requestId } = action.meta;
+        // if (
+        //   state.loading === 'pending' &&
+        //   state.currentRequestId === requestId
+        // ) {
+        //   state.loading = 'idle'
+        //   state.error = action.error
+        //   state.currentRequestId = undefined
+        // }
+      });
+    builder
+      .addCase(createToDo.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(createToDo.fulfilled, (state, action) => {
+        state.loading = false;
+
+        const allToDos = action.payload.data;
+        console.log("allToDos", allToDos);
+        state.toDoList = allToDos;
+      })
+      .addCase(createToDo.rejected, (state, action) => {
+        // const { requestId } = action.meta;
+        // if (
+        //   state.loading === 'pending' &&
+        //   state.currentRequestId === requestId
+        // ) {
+        //   state.loading = 'idle'
+        //   state.error = action.error
+        //   state.currentRequestId = undefined
+        // }
+      });
   },
 });
 
