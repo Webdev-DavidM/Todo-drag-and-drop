@@ -1,8 +1,5 @@
 
-
-
-https://github.com/Webdev-DavidM/Todo-drag-and-drop/assets/56081000/4f10ce60-d8cd-4101-93d0-f5a71830af03
-
+https://github.com/Webdev-DavidM/Todo-drag-and-drop/assets/56081000/8b2407ff-0acb-4861-891f-ff6a1ea4bc4d
 
 
 **Key feature**
@@ -15,7 +12,7 @@ https://github.com/Webdev-DavidM/Todo-drag-and-drop/assets/56081000/4f10ce60-d8c
 6) Toast pop up for successful saves to the server
 
 **Still to do**
-1) Fix the glitch when items are dragged
+1) Fix the glitch when items are dragged- FIXED
 2) Improve the UI styling
 3) Add JWT to authorise changing the todos
 4) Host the react app on aws s3 and the backend via serverless framework to a api lambda proxy
