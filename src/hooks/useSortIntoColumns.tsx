@@ -10,22 +10,22 @@ type ColumnType = {
   };
 };
 
-export const useSortItemsIntoColumns = () => {
+export const useSortItemsIntoColumns = (setColumns: any) => {
   const toDos = useSelector((state: any) => state.toDoList.toDoList);
-  const [sortedColumns, setSortedColumns] = useState<ColumnType>({
-    toDo: {
-      name: Columns.TO_DO,
-      items: [],
-    },
-    inProgress: {
-      name: Columns.IN_PROGRESS,
-      items: [],
-    },
-    done: {
-      name: Columns.DONE,
-      items: [],
-    },
-  });
+  // const [sortedColumns, setSortedColumns] = useState<ColumnType>({
+  //   toDo: {
+  //     name: Columns.TO_DO,
+  //     items: [],
+  //   },
+  //   inProgress: {
+  //     name: Columns.IN_PROGRESS,
+  //     items: [],
+  //   },
+  //   done: {
+  //     name: Columns.DONE,
+  //     items: [],
+  //   },
+  // });
 
   useEffect(() => {
     const toDo = toDos.filter((todo: Todo) => todo.column === Columns.TO_DO);
@@ -33,7 +33,7 @@ export const useSortItemsIntoColumns = () => {
       (todo: Todo) => todo.column === Columns.IN_PROGRESS
     );
     const done = toDos.filter((todo: Todo) => todo.column === Columns.DONE);
-    setSortedColumns({
+    setColumns({
       toDo: {
         name: Columns.TO_DO,
         items: toDo,
@@ -47,7 +47,7 @@ export const useSortItemsIntoColumns = () => {
         items: done,
       },
     });
-  }, [toDos]);
+  }, [toDos, setColumns]);
 
-  return { sortedColumns };
+  // return { sortedColumns };
 };

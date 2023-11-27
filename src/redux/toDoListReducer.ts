@@ -46,6 +46,23 @@ export const createToDo: any = createAsyncThunk<any>(
   }
 );
 
+export const updateToDoStatus: any = createAsyncThunk<any>(
+  "toDoList/updateToDoStatus",
+  async (todos: any, { dispatch, getState }) => {
+    try {
+      const updatedTodos = await axios.put(
+        "http://localhost:5000/todos/updateColumns",
+        {
+          todos,
+        }
+      );
+      return updatedTodos;
+    } catch {
+      console.error("err");
+    }
+  }
+);
+
 export const deleteToDo: any = createAsyncThunk<any>(
   "toDoList/deleteToDo",
   async (deleteId: any, { dispatch, getState }) => {
@@ -169,6 +186,24 @@ export const toDoListSlice = createSlice({
       })
       .addCase(createToDo.rejected, (state, action) => {
         enqueueSnackbar("Todo could not be saved", {
+          variant: "warning",
+        });
+      });
+    // updateToDoStatus
+    builder
+      .addCase(updateToDoStatus.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(updateToDoStatus.fulfilled, (state, action) => {
+        state.loading = false;
+        enqueueSnackbar("Todo status updated and saved.", {
+          variant: "success",
+        });
+        const allToDos = action.payload.data;
+        state.toDoList = allToDos;
+      })
+      .addCase(updateToDoStatus.rejected, (state, action) => {
+        enqueueSnackbar("Todo status updatecould not be saved", {
           variant: "warning",
         });
       });

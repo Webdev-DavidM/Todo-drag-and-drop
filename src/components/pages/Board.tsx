@@ -1,52 +1,146 @@
-import { Box, Button, Grid, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  Grid,
+  Typography,
+  useTheme,
+} from "@mui/material";
+import React, { useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import { useDispatch } from "react-redux";
-import { setShowTodoModal, updateToDo } from "../../redux/toDoListReducer";
+import { lime, purple } from "@mui/material/colors";
 import { useSelector } from "react-redux";
-
-// Custom hook
 import { useSortItemsIntoColumns } from "../../hooks/useSortIntoColumns";
+import { flattenColumnObjectToTodoListArray } from "../../helpers/flattenColumnObjectToTodoListArray";
+import { useDispatch } from "react-redux";
 
-// Components
+// types
+import { Columns } from "../../types";
 import Todo from "./Todo";
+import {
+  setShowTodoModal,
+  updateToDoStatus,
+} from "../../redux/toDoListReducer";
+
+// const onDragEnd = (result: any, columns: any, setColumns: any) => {
+//   if (!result.destination) return;
+//   const { source, destination } = result;
+
+//   if (source.droppableId !== destination.droppableId) {
+//     const sourceColumn = columns[source.droppableId];
+//     const destColumn = columns[destination.droppableId];
+//     const sourceItems = [...sourceColumn.items];
+//     const destItems = [...destColumn.items];
+//     const [removed] = sourceItems.splice(source.index, 1);
+//     destItems.splice(destination.index, 0, removed);
+//     const columnsUpdated = {
+//       ...columns,
+//       [source.droppableId]: {
+//         ...sourceColumn,
+//         items: sourceItems,
+//       },
+//       [destination.droppableId]: {
+//         ...destColumn,
+//         items: destItems,
+//       },
+//     };
+//     setColumns(columnsUpdated);
+//     const flattenedTodoList =
+//       flattenColumnObjectToTodoListArray(columnsUpdated);
+
+//     dispatch(updateToDoStatus(flattenedTodoList))
+//   } else {
+//     const column = columns[source.droppableId];
+//     const copiedItems = [...column.items];
+//     const [removed] = copiedItems.splice(source.index, 1);
+//     copiedItems.splice(destination.index, 0, removed);
+//     const columnsUpdated = {
+//       ...columns,
+//       [source.droppableId]: {
+//         ...column,
+//         items: copiedItems,
+//       },
+//     };
+//     const flattenedTodoList =
+//       flattenColumnObjectToTodoListArray(columnsUpdated);
+
+//       dispatch(updateToDoStatus(flattenedTodoList))
+//     setColumns(columnsUpdated);
+//   }
+// };
 
 function Board() {
-  const { sortedColumns } = useSortItemsIntoColumns();
-  const todos = useSelector((state: any) => state.toDoList.toDoList);
+  const [columns, setColumns] = useState<Columns>({
+    toDo: {
+      name: "To do",
+      items: [],
+    },
+    inProgress: {
+      name: "In Progress",
+      items: [],
+    },
+    done: {
+      name: "Done",
+      items: [],
+    },
+  });
   const dispatch = useDispatch();
 
-  const onDragEnd = (result: any) => {
+  useSortItemsIntoColumns(setColumns);
+
+  const onDragEnd = (result: any, columns: any, setColumns: any) => {
     if (!result.destination) return;
     const { source, destination } = result;
 
-    // updates the column value of the todo to a value the server will understand
-    const sourceColumn = (source: any) => {
-      switch (source.droppableId) {
-        case "toDo":
-          return "To do";
-        case "inProgress":
-          return "In progress";
-        case "done":
-          return "Done";
-        default:
-          return;
-      }
-    };
+    if (source.droppableId !== destination.droppableId) {
+      const sourceColumn = columns[source.droppableId];
+      const destColumn = columns[destination.droppableId];
+      const sourceItems = [...sourceColumn.items];
+      const destItems = [...destColumn.items];
+      const [removed] = sourceItems.splice(source.index, 1);
+      destItems.splice(destination.index, 0, removed);
+      const columnsUpdated = {
+        ...columns,
+        [source.droppableId]: {
+          ...sourceColumn,
+          items: sourceItems,
+        },
+        [destination.droppableId]: {
+          ...destColumn,
+          items: destItems,
+        },
+      };
+      setColumns(columnsUpdated);
+      const flattenedTodoList =
+        flattenColumnObjectToTodoListArray(columnsUpdated);
 
-    let itemToMove = todos.filter((item: any) => {
-      return item.column === sourceColumn(source);
-    });
-    itemToMove = itemToMove[source.index];
-    const columnToMoveTo = sourceColumn(destination);
-    const updatedItem = {
-      ...itemToMove,
-      column: columnToMoveTo,
-    };
-    dispatch(updateToDo(updatedItem));
+      dispatch(updateToDoStatus(flattenedTodoList));
+    } else {
+      const column = columns[source.droppableId];
+      const copiedItems = [...column.items];
+      const [removed] = copiedItems.splice(source.index, 1);
+      copiedItems.splice(destination.index, 0, removed);
+      const columnsUpdated = {
+        ...columns,
+        [source.droppableId]: {
+          ...column,
+          items: copiedItems,
+        },
+      };
+      const flattenedTodoList =
+        flattenColumnObjectToTodoListArray(columnsUpdated);
+
+      dispatch(updateToDoStatus(flattenedTodoList));
+      setColumns(columnsUpdated);
+    }
   };
 
   return (
-    <DragDropContext onDragEnd={(result) => onDragEnd(result)}>
+    <DragDropContext
+      onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
+    >
       <Grid
         container
         sx={{ display: "flex", justifyContent: "center", width: "100%" }}
@@ -73,7 +167,7 @@ function Board() {
         >
           Please drag and drop your todos in the relevant columns
         </Typography>
-        {Object.entries(sortedColumns)?.map(([columnId, column], index) => {
+        {Object.entries(columns)?.map(([columnId, column], index) => {
           return (
             <Box
               sx={{
