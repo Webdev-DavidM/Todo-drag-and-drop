@@ -41,7 +41,6 @@ const Todo = ({ item, provided }: Props) => {
     enableReinitialize: true,
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log(values);
       dispatch(
         updateToDo({
           id: item.id,
@@ -56,22 +55,24 @@ const Todo = ({ item, provided }: Props) => {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <form
+      onSubmit={formik.handleSubmit}
+      style={{
+        width: "100%",
+      }}
+    >
       <Card
         ref={provided.innerRef}
         {...provided.draggableProps}
         {...provided.dragHandleProps}
         sx={{
-          maxWidth: 345,
-          alignSelf: "flex-start",
           backgroundColor: "primary.light",
-          p: 1,
+          width: "100%",
         }}
       >
         <CardContent
           sx={{
             width: "100",
-            minWidth: 240,
           }}
         >
           <Typography gutterBottom variant="h6" component="div">

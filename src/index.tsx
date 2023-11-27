@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { SnackBar } from "./components/SnackBar";
+import "./index.css";
 
 const theme = createTheme({
   palette: {

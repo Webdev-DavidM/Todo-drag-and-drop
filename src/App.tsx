@@ -31,14 +31,8 @@ function App() {
     <Grid
       container
       sx={{
-        width: "100vw",
         height: "100vh",
-        boxSizing: "border-box",
-        position: "relative",
-        p: 1,
-        backgroundColor: "white",
-        justifyContent: "flex-start",
-        flexDirection: "column",
+        p: 3,
       }}
     >
       <BrowserRouter basename={process.env.PUBLIC_URL}>
@@ -51,6 +45,7 @@ function App() {
             return (
               // <ProtectedRoute>
               <Board />
+
               // </ProtectedRoute>
             );
           }}
