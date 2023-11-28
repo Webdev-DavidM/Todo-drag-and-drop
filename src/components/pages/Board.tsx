@@ -82,10 +82,9 @@ function Board() {
           items: copiedItems,
         },
       };
+      setColumns(columnsUpdated);
       const flattenedTodoList =
         flattenColumnObjectToTodoListArray(columnsUpdated);
-
-      setColumns(columnsUpdated);
       dispatch(updateToDoStatus(flattenedTodoList));
     }
   };
@@ -98,74 +97,96 @@ function Board() {
         sx={{
           display: 'flex',
           justifyContent: 'center',
-          width: '100%',
+          width: '1500px',
+
           height: '100%',
           backgroundColor: '#E3F2FD',
           borderRadius: '10px',
+
           p: 3,
         }}>
-        <Grid
-          item
-          xs={12}
+        <Card
           sx={{
-            backgroundColor: 'white',
-            borderRadius: '10px',
-            maxHeight: '80px',
-            p: 1,
+            width: '100%',
           }}>
-          <Typography
-            variant='h5'
-            color='primary'
+          <Grid
+            item
+            xs={12}
             sx={{
-              width: '100%',
-              textAlign: 'center',
+              backgroundColor: 'white',
+              borderRadius: '10px',
+              maxHeight: '80px',
+              p: 1,
             }}>
-            Todo list
-          </Typography>
+            <Typography
+              variant='h5'
+              color='primary'
+              sx={{
+                width: '100%',
+                textAlign: 'center',
+              }}>
+              Todo list
+            </Typography>
 
-          <Typography
-            variant='body2'
-            color='primary'
-            sx={{
-              width: '100%',
-              textAlign: 'center',
-            }}>
-            Please drag and drop your todos in the relevant columns
-          </Typography>
-        </Grid>
+            <Typography
+              variant='body2'
+              color='primary'
+              sx={{
+                width: '100%',
+                textAlign: 'center',
+              }}>
+              Please drag and drop your todos in the relevant columns
+            </Typography>
+          </Grid>
+        </Card>
+
         <Grid
           container
           sx={{
             display: 'flex',
-            justifyContent: 'space-evenly',
+            justifyContent: 'space-between',
             width: '100%',
             backgroundColor: 'white',
             borderRadius: '10px',
-            height: '82%',
+            height: '90%',
             p: 3,
+            mt: 2.5,
             overflowY: 'auto',
+            borderBottom: '1px solid #7e7e7e',
           }}>
           {Object.entries(columns)?.map(([columnId, column], index) => {
             return (
-              <Box
+              <Grid
+                item
+                xs={3.9}
                 sx={{
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
-
+                  gap: 1,
                   width: '25%',
                   backgroundColor: '#E3F2FD',
                   borderRadius: '10px',
                   height: '100%',
+                  overflow: 'hidden',
                 }}
                 key={columnId}>
-                <Grid container justifyContent={'space-between'} p={2}>
+                <Grid
+                  container
+                  justifyContent={'space-between'}
+                  p={2}
+                  sx={{
+                    backgroundColor: '#f3f8fc',
+                  }}>
                   <Typography variant='h6' color='primary'>
                     {column.name}
                   </Typography>
                   <Button
                     size='small'
-                    variant='contained'
+                    variant='outlined'
+                    sx={{
+                      background: 'white',
+                    }}
                     color='primary'
                     onClick={() =>
                       dispatch(
@@ -216,7 +237,7 @@ function Board() {
                     }}
                   </Droppable>
                 </Grid>
-              </Box>
+              </Grid>
             );
           })}
         </Grid>

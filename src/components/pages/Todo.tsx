@@ -58,7 +58,8 @@ const Todo = ({ item, provided }: Props) => {
     <form
       onSubmit={formik.handleSubmit}
       style={{
-        width: '100%',
+        width: '80%',
+        margin: 'auto',
       }}>
       <Card
         ref={provided.innerRef}
@@ -126,25 +127,26 @@ const Todo = ({ item, provided }: Props) => {
           sx={{
             display: 'flex',
             justifyContent: 'space-between',
+            p: 2,
           }}>
           {!edit && (
             <Button
               size='small'
-              variant='contained'
+              variant='outlined'
               onClick={() => setEdit(true)}>
               Edit
             </Button>
           )}
 
           {edit && (
-            <Button size='small' variant='contained' type='submit'>
+            <Button size='small' variant='outlined' type='submit'>
               Save
             </Button>
           )}
 
           <Button
             size='small'
-            variant='contained'
+            variant='outlined'
             color='secondary'
             onClick={() => {
               dispatch(setDeleteId(item.id));
