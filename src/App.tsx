@@ -25,7 +25,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getAllToDo());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Grid

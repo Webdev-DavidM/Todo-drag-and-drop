@@ -1,6 +1,6 @@
-import { useAppSelector, useAppDispatch } from "../hooks/hooks";
-import { useFormik } from "formik";
-import * as Yup from "yup";
+import { useAppSelector, useAppDispatch } from '../hooks/hooks';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 // Mui
 import {
@@ -13,12 +13,12 @@ import {
   Modal,
   TextField,
   Typography,
-} from "@mui/material";
+} from '@mui/material';
 import {
   deleteToDo,
   setDeleteId,
   setShowDeleteModal,
-} from "../redux/toDoListReducer";
+} from '../redux/toDoListReducer';
 
 // Store
 
@@ -30,65 +30,59 @@ function DeleteModal() {
     <Modal open={true}>
       <Box
         sx={{
-          position: "absolute",
+          position: 'absolute',
           left: 0,
           top: 0,
-          width: "100vw",
-          height: "100vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
+          width: '100vw',
+          height: '100vh',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
         <Grid
           container
           sx={{
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
           <Card
             sx={{
-              width: "30%",
-              alignSelf: "flex-start",
+              width: '30%',
+              alignSelf: 'flex-start',
 
               p: 1,
-              margin: "auto",
-            }}
-          >
+              margin: 'auto',
+            }}>
             <CardContent>
-              <Typography gutterBottom variant="h6" component="div" mt={2}>
+              <Typography gutterBottom variant='h6' component='div' mt={2}>
                 Are you sure you want to delete this todo?
               </Typography>
             </CardContent>
             <CardActions
               sx={{
-                display: "flex",
-                justifyContent: "flex-end",
-              }}
-            >
+                display: 'flex',
+                justifyContent: 'flex-end',
+              }}>
               <Button
-                size="small"
-                variant="contained"
-                type="submit"
+                size='small'
+                variant='outlined'
+                type='submit'
                 onClick={() => {
                   dispatch(setShowDeleteModal(false));
                   dispatch(deleteToDo(deleteId));
-                  dispatch(setDeleteId(""));
-                }}
-              >
+                  dispatch(setDeleteId(''));
+                }}>
                 Delete
               </Button>
               <Button
-                size="small"
-                variant="contained"
-                color="secondary"
+                size='small'
+                variant='outlined'
+                color='secondary'
                 onClick={() => {
-                  dispatch(setDeleteId(""));
+                  dispatch(setDeleteId(''));
                   dispatch(setShowDeleteModal(false));
-                }}
-              >
+                }}>
                 Cancel
               </Button>
             </CardActions>

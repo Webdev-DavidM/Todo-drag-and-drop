@@ -24,18 +24,20 @@ import {
   updateToDoStatus,
 } from '../../redux/toDoListReducer';
 
+import { COLUMN } from '../../enums';
+
 function Board() {
   const [columns, setColumns] = useState<Columns>({
     toDo: {
-      name: 'To do',
+      name: COLUMN.TO_DO,
       items: [],
     },
     inProgress: {
-      name: 'In Progress',
+      name: COLUMN.IN_PROGRESS,
       items: [],
     },
     done: {
-      name: 'Done',
+      name: COLUMN.DONE,
       items: [],
     },
   });
@@ -98,9 +100,9 @@ function Board() {
           display: 'flex',
           justifyContent: 'center',
           width: '1500px',
-
+          border: '1px solid #e3e3e3',
           height: '100%',
-          backgroundColor: '#E3F2FD',
+          backgroundColor: 'primary.background',
           borderRadius: '10px',
 
           p: 3,
@@ -108,6 +110,7 @@ function Board() {
         <Card
           sx={{
             width: '100%',
+            border: '1px solid #e3e3e3',
           }}>
           <Grid
             item
@@ -120,7 +123,7 @@ function Board() {
             }}>
             <Typography
               variant='h5'
-              color='primary'
+              color='primary.text'
               sx={{
                 width: '100%',
                 textAlign: 'center',
@@ -130,7 +133,7 @@ function Board() {
 
             <Typography
               variant='body2'
-              color='primary'
+              color='primary.text'
               sx={{
                 width: '100%',
                 textAlign: 'center',
@@ -152,6 +155,7 @@ function Board() {
             p: 3,
             mt: 2.5,
             overflowY: 'auto',
+            border: '1px solid #e3e3e3',
             borderBottom: '1px solid #7e7e7e',
           }}>
           {Object.entries(columns)?.map(([columnId, column], index) => {
@@ -165,10 +169,11 @@ function Board() {
                   alignItems: 'center',
                   gap: 1,
                   width: '25%',
-                  backgroundColor: '#E3F2FD',
+                  backgroundColor: 'primary.background',
                   borderRadius: '10px',
                   height: '100%',
                   overflow: 'hidden',
+                  border: '1px solid #e3e3e3',
                 }}
                 key={columnId}>
                 <Grid
@@ -176,9 +181,10 @@ function Board() {
                   justifyContent={'space-between'}
                   p={2}
                   sx={{
-                    backgroundColor: '#f3f8fc',
+                    backgroundColor: 'primary.heading',
+                    borderBottom: '1px solid #e3e3e3',
                   }}>
-                  <Typography variant='h6' color='primary'>
+                  <Typography variant='h6' color='primary.text'>
                     {column.name}
                   </Typography>
                   <Button

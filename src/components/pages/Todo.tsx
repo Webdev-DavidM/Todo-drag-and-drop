@@ -17,14 +17,10 @@ import {
   setShowDeleteModal,
   updateToDo,
 } from '../../redux/toDoListReducer';
+import { Todo as TodoType } from '../../types';
 
 type Props = {
-  item: {
-    title: string;
-    details: string;
-    id: string;
-    column: string;
-  };
+  item: TodoType;
   provided: any;
 };
 
@@ -67,12 +63,17 @@ const Todo = ({ item, provided }: Props) => {
         {...provided.dragHandleProps}
         sx={{
           width: '100%',
+          border: '1px solid #e3e3e3',
         }}>
         <CardContent
           sx={{
             width: '100',
           }}>
-          <Typography gutterBottom variant='h6' component='div'>
+          <Typography
+            gutterBottom
+            variant='h6'
+            component='div'
+            color='primary.text'>
             Title
           </Typography>
           {edit ? (
@@ -89,21 +90,32 @@ const Todo = ({ item, provided }: Props) => {
               sx={{
                 '& legend': { display: 'none' },
                 '& fieldset': { top: 0 },
+                color: 'primary.text',
               }}
             />
           ) : (
-            <Typography gutterBottom variant='body2' component='div'>
+            <Typography
+              gutterBottom
+              variant='body2'
+              component='div'
+              color='primary.text'>
               {formik?.values?.title}
             </Typography>
           )}
 
-          <Typography gutterBottom variant='h6' component='div' mt={2}>
+          <Typography
+            gutterBottom
+            variant='h6'
+            component='div'
+            mt={2}
+            color='primary.text'>
             Description
           </Typography>
           {edit ? (
             <TextField
               fullWidth
               // multiline
+
               size='small'
               name='details'
               placeholder='Enter a description for your todo'
@@ -115,10 +127,15 @@ const Todo = ({ item, provided }: Props) => {
               sx={{
                 '& legend': { display: 'none' },
                 '& fieldset': { top: 0 },
+                color: 'primary.text',
               }}
             />
           ) : (
-            <Typography gutterBottom variant='body2' component='div'>
+            <Typography
+              gutterBottom
+              variant='body2'
+              component='div'
+              color='primary.text'>
               {formik?.values?.details}
             </Typography>
           )}

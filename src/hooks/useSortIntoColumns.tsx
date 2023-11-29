@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { Todo } from "../types";
-import { Columns } from "../enums";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from 'react';
+import { Todo } from '../types';
+import { COLUMN } from '../enums';
+import { useSelector } from 'react-redux';
 
 type ColumnType = {
   [key: string]: {
@@ -28,22 +28,22 @@ export const useSortItemsIntoColumns = (setColumns: any) => {
   // });
 
   useEffect(() => {
-    const toDo = toDos.filter((todo: Todo) => todo.column === Columns.TO_DO);
+    const toDo = toDos.filter((todo: Todo) => todo.column === COLUMN.TO_DO);
     const inProgress = toDos.filter(
-      (todo: Todo) => todo.column === Columns.IN_PROGRESS
+      (todo: Todo) => todo.column === COLUMN.IN_PROGRESS
     );
-    const done = toDos.filter((todo: Todo) => todo.column === Columns.DONE);
+    const done = toDos.filter((todo: Todo) => todo.column === COLUMN.DONE);
     setColumns({
       toDo: {
-        name: Columns.TO_DO,
+        name: COLUMN.TO_DO,
         items: toDo,
       },
       inProgress: {
-        name: Columns.IN_PROGRESS,
+        name: COLUMN.IN_PROGRESS,
         items: inProgress,
       },
       done: {
-        name: Columns.DONE,
+        name: COLUMN.DONE,
         items: done,
       },
     });
