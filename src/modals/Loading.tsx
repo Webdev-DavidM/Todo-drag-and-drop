@@ -1,10 +1,9 @@
-import { Box, CircularProgress, Grid, Modal } from "@mui/material";
-import React from "react";
-import { useAppSelector } from "../hooks/hooks";
+// Mui
+import { Box, CircularProgress, Grid } from "@mui/material";
 
 function Loading() {
   return (
-    <Modal open={true}>
+
       <Box
         sx={{
           position: "absolute",
@@ -15,6 +14,8 @@ function Loading() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          
+
         }}
       >
         <Grid
@@ -28,7 +29,7 @@ function Loading() {
           <CircularProgress size="3rem" data-cy="loading-spinner" />
         </Grid>
       </Box>
-    </Modal>
+    
   );
 }
 

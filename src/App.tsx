@@ -1,5 +1,6 @@
 // Store
 import { useAppDispatch, useAppSelector } from "./hooks/hooks";
+import { useEffect } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 
 // Mui
@@ -13,8 +14,11 @@ import Signup from "./components/pages/Signup";
 // import ProtectedRoute from "./helpers/ProtectedRoute";
 import AddTodo from "./modals/AddTodo";
 import DeleteModal from "./modals/DeleteModal";
+
+// Store
 import { getAllToDo } from "./redux/toDoListReducer";
-import { useEffect } from "react";
+
+// Components
 
 function App() {
   const loading = useAppSelector((state) => state.toDoList.loading);

@@ -27,7 +27,7 @@ export const SnackBar = (props: IPropsSnackBar) => {
   return (
     <StyledSnackbarProvider
       maxSnack={3}
-      autoHideDuration={20000000}
+      autoHideDuration={1000}
       anchorOrigin={{
         vertical: 'bottom',
         horizontal: 'center',
