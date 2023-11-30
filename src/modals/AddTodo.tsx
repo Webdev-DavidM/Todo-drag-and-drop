@@ -111,6 +111,7 @@ function AddTodo({ column }: Props) {
                   size="small"
                   name="title"
                   placeholder="Enter a title for your todo"
+                  data-cy="todo-input-title"
                   type="text"
                   value={formik?.values?.title}
                   onChange={formik.handleChange}
@@ -130,6 +131,7 @@ function AddTodo({ column }: Props) {
                   size="small"
                   name="details"
                   placeholder="Enter a description for your todo"
+                  data-cy="todo-input-description"
                   type="text"
                   value={formik?.values?.details}
                   onChange={formik.handleChange}
@@ -151,7 +153,12 @@ function AddTodo({ column }: Props) {
                   justifyContent: "flex-end",
                 }}
               >
-                <Button size="small" variant="contained" type="submit">
+                <Button
+                  size="small"
+                  variant="contained"
+                  type="submit"
+                  data-cy="todo-save-button"
+                >
                   Save
                 </Button>
                 <Button

@@ -5,19 +5,19 @@ import {
   CardContent,
   TextField,
   Typography,
-} from '@mui/material';
-import { useState } from 'react';
-import { useAppDispatch } from '../../hooks/hooks';
-import { useFormik } from 'formik';
+} from "@mui/material";
+import { useState } from "react";
+import { useAppDispatch } from "../../hooks/hooks";
+import { useFormik } from "formik";
 
 // validationSchema
-import { validationSchema } from '../../helpers/validationSchema';
+import { validationSchema } from "../../helpers/validationSchema";
 import {
   setDeleteId,
   setShowDeleteModal,
   updateToDo,
-} from '../../redux/toDoListReducer';
-import { Todo as TodoType } from '../../types';
+} from "../../redux/toDoListReducer";
+import { Todo as TodoType } from "../../types";
 
 type Props = {
   item: TodoType;
@@ -54,61 +54,70 @@ const Todo = ({ item, provided }: Props) => {
     <form
       onSubmit={formik.handleSubmit}
       style={{
-        width: '80%',
-        margin: 'auto',
-      }}>
+        width: "80%",
+        margin: "auto",
+      }}
+    >
       <Card
         ref={provided.innerRef}
         {...provided.draggableProps}
         {...provided.dragHandleProps}
+        data-cy="todo-card"
         sx={{
-          width: '100%',
-          border: '1px solid #e3e3e3',
-        }}>
+          width: "100%",
+          border: "1px solid #e3e3e3",
+        }}
+      >
         <CardContent
           sx={{
-            width: '100',
-          }}>
+            width: "100",
+          }}
+        >
           <Typography
             gutterBottom
-            variant='h6'
-            component='div'
-            color='primary.text'>
+            variant="h6"
+            component="div"
+            color="primary.text"
+          >
             Title
           </Typography>
           {edit ? (
             <TextField
               fullWidth
-              size='small'
-              name='title'
-              placeholder='Enter a title for your todo'
-              type='text'
+              size="small"
+              name="title"
+              data-cy="todo-input-title"
+              placeholder="Enter a title for your todo"
+              type="text"
               value={formik?.values?.title}
               onChange={formik.handleChange}
               error={formik.touched.title && Boolean(formik.errors.title)}
-              helperText={formik.touched.title ? formik.errors.title : ''}
+              helperText={formik.touched.title ? formik.errors.title : ""}
               sx={{
-                '& legend': { display: 'none' },
-                '& fieldset': { top: 0 },
-                color: 'primary.text',
+                "& legend": { display: "none" },
+                "& fieldset": { top: 0 },
+                color: "primary.text",
               }}
             />
           ) : (
             <Typography
               gutterBottom
-              variant='body2'
-              component='div'
-              color='primary.text'>
+              variant="body2"
+              component="div"
+              color="primary.text"
+              data-cy="todo-title"
+            >
               {formik?.values?.title}
             </Typography>
           )}
 
           <Typography
             gutterBottom
-            variant='h6'
-            component='div'
+            variant="h6"
+            component="div"
             mt={2}
-            color='primary.text'>
+            color="primary.text"
+          >
             Description
           </Typography>
           {edit ? (
@@ -116,59 +125,70 @@ const Todo = ({ item, provided }: Props) => {
               fullWidth
               // multiline
 
-              size='small'
-              name='details'
-              placeholder='Enter a description for your todo'
-              type='text'
+              size="small"
+              name="details"
+              placeholder="Enter a description for your todo"
+              type="text"
               value={formik?.values?.details}
               onChange={formik.handleChange}
               error={formik.touched.details && Boolean(formik.errors.details)}
-              helperText={formik.touched.details ? formik.errors.details : ''}
+              helperText={formik.touched.details ? formik.errors.details : ""}
               sx={{
-                '& legend': { display: 'none' },
-                '& fieldset': { top: 0 },
-                color: 'primary.text',
+                "& legend": { display: "none" },
+                "& fieldset": { top: 0 },
+                color: "primary.text",
               }}
             />
           ) : (
             <Typography
               gutterBottom
-              variant='body2'
-              component='div'
-              color='primary.text'>
+              variant="body2"
+              component="div"
+              color="primary.text"
+            >
               {formik?.values?.details}
             </Typography>
           )}
         </CardContent>
         <CardActions
           sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
+            display: "flex",
+            justifyContent: "space-between",
             p: 2,
-          }}>
+          }}
+        >
           {!edit && (
             <Button
-              size='small'
-              variant='outlined'
-              onClick={() => setEdit(true)}>
+              data-cy="todo-edit-button"
+              size="small"
+              variant="outlined"
+              onClick={() => setEdit(true)}
+            >
               Edit
             </Button>
           )}
 
           {edit && (
-            <Button size='small' variant='outlined' type='submit'>
+            <Button
+              size="small"
+              variant="outlined"
+              type="submit"
+              data-cy="todo-save-button"
+            >
               Save
             </Button>
           )}
 
           <Button
-            size='small'
-            variant='outlined'
-            color='secondary'
+            size="small"
+            variant="outlined"
+            data-cy="todo-delete-button"
+            color="secondary"
             onClick={() => {
               dispatch(setDeleteId(item.id));
               dispatch(setShowDeleteModal(true));
-            }}>
+            }}
+          >
             Delete
           </Button>
         </CardActions>

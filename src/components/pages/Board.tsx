@@ -150,6 +150,7 @@ function Board() {
                     sx={{
                       background: "white",
                     }}
+                    data-cy="add-todo-button"
                     color="primary"
                     onClick={() =>
                       dispatch(
