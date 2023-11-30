@@ -1,6 +1,4 @@
 import { useAppSelector, useAppDispatch } from "../hooks/hooks";
-import { useFormik } from "formik";
-import * as Yup from "yup";
 
 // Mui
 import {
@@ -11,7 +9,6 @@ import {
   CardContent,
   Grid,
   Modal,
-  TextField,
   Typography,
 } from "@mui/material";
 import {

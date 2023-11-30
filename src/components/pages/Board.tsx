@@ -11,7 +11,7 @@ import { useSortItemsIntoColumns } from "../../hooks/useSortIntoColumns";
 import { useOnDragEnd } from "../../hooks/useOnDragEnd";
 
 // types
-import { Columns } from "../../types";
+import { ColumnsObject } from "../../types";
 
 // Store
 import { setShowTodoModal } from "../../redux/toDoListReducer";
@@ -20,7 +20,7 @@ import { setShowTodoModal } from "../../redux/toDoListReducer";
 import { COLUMN } from "../../enums";
 
 function Board() {
-  const [columns, setColumns] = useState<Columns>({
+  const [columns, setColumns] = useState<ColumnsObject>({
     toDo: {
       name: COLUMN.TO_DO,
       items: [],

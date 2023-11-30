@@ -1,31 +1,14 @@
-import { useEffect, useState } from 'react';
-import { Todo } from '../types';
-import { COLUMN } from '../enums';
-import { useSelector } from 'react-redux';
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
-type ColumnType = {
-  [key: string]: {
-    name: string;
-    items: Todo[];
-  };
-};
+// Enums
+import { COLUMN } from "../enums";
+
+// Types
+import { Todo } from "../types";
 
 export const useSortItemsIntoColumns = (setColumns: any) => {
   const toDos = useSelector((state: any) => state.toDoList.toDoList);
-  // const [sortedColumns, setSortedColumns] = useState<ColumnType>({
-  //   toDo: {
-  //     name: Columns.TO_DO,
-  //     items: [],
-  //   },
-  //   inProgress: {
-  //     name: Columns.IN_PROGRESS,
-  //     items: [],
-  //   },
-  //   done: {
-  //     name: Columns.DONE,
-  //     items: [],
-  //   },
-  // });
 
   useEffect(() => {
     const toDo = toDos.filter((todo: Todo) => todo.column === COLUMN.TO_DO);
@@ -48,6 +31,4 @@ export const useSortItemsIntoColumns = (setColumns: any) => {
       },
     });
   }, [toDos, setColumns]);
-
-  // return { sortedColumns };
 };

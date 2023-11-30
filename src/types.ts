@@ -12,7 +12,7 @@ export type Column = {
   items: Todo[] | [];
 };
 
-export type Columns = {
+export type ColumnsObject = {
   toDo: Column;
   inProgress: Column;
   done: Column;
