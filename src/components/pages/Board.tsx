@@ -164,12 +164,7 @@ function Board() {
                     Add todo
                   </Button>
                 </Grid>
-                <Grid
-                  container
-                  sx={{
-                    overflowY: "auto",
-                  }}
-                >
+                <Grid container>
                   <Droppable droppableId={columnId} key={columnId}>
                     {(provided, snapshot) => {
                       return (
@@ -181,6 +176,7 @@ function Board() {
                             height: "100%",
                             overflowY: "auto",
                             p: 2,
+                            pb: 20,
                             gap: 2,
                           }}
                         >
