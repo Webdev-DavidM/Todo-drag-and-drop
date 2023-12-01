@@ -1,5 +1,3 @@
-import { Column } from "../types";
-
 export const flattenColumnObjectToTodoListArray = (columnObject: any) => {
   const flattenedTodoList: any = Object.keys(columnObject).reduce(
     (acc: any, key: any) => {

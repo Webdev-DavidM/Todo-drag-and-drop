@@ -1,3 +1,7 @@
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
+// Mui
 import {
   Button,
   Card,
@@ -6,12 +10,8 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useFormik } from "formik";
-import * as Yup from "yup";
 
-type Props = {};
-
-function Login({}: Props) {
+const Login = () => {
   const formik = useFormik({
     enableReinitialize: true,
     validationSchema: Yup.object({
@@ -108,6 +108,6 @@ function Login({}: Props) {
       </Grid>
     </form>
   );
-}
+};
 
 export default Login;

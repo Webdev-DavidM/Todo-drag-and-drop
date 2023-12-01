@@ -11,13 +11,13 @@ import {
   Modal,
   Typography,
 } from "@mui/material";
+
+// Store
 import {
   deleteToDo,
   setDeleteId,
   setShowDeleteModal,
 } from "../redux/toDoListReducer";
-
-// Store
 
 function DeleteModal() {
   const dispatch = useAppDispatch();

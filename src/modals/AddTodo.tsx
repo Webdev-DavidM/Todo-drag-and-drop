@@ -1,4 +1,4 @@
-import { useAppSelector, useAppDispatch } from "../hooks/hooks";
+import { useAppDispatch } from "../hooks/hooks";
 import { useFormik } from "formik";
 import { v4 as uuidv4 } from "uuid";
 
@@ -27,7 +27,6 @@ type Props = {
 };
 
 function AddTodo({ column }: Props) {
-  const showTodoModal = useAppSelector((state) => state.toDoList.showTodoModal);
   const dispatch = useAppDispatch();
   let initialFieldValues = {
     title: "",

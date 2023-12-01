@@ -6,10 +6,10 @@ type Props = {
   children: React.ReactNode;
 };
 
-function ProtectedRoute({ children }: Props) {
+const ProtectedRoute = ({ children }: Props) => {
   const authenticated = useAppSelector((state) => state.toDoList.authenticated);
 
   return <div>{authenticated ? children : <Login />}</div>;
-}
+};
 
 export default ProtectedRoute;
