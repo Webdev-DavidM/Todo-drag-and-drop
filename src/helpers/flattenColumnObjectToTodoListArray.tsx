@@ -1,8 +1,6 @@
 import { Column } from "../types";
 
 export const flattenColumnObjectToTodoListArray = (columnObject: any) => {
-  console.log("column", columnObject);
-
   const flattenedTodoList: any = Object.keys(columnObject).reduce(
     (acc: any, key: any) => {
       const columnItems = columnObject[key].items;
@@ -16,6 +14,5 @@ export const flattenColumnObjectToTodoListArray = (columnObject: any) => {
     },
     []
   );
-  console.log("flattenedTodoList", flattenedTodoList);
   return flattenedTodoList;
 };
