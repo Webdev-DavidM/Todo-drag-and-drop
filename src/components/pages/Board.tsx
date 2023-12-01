@@ -164,7 +164,13 @@ function Board() {
                     Add todo
                   </Button>
                 </Grid>
-                <Grid container>
+                <Grid
+                  container
+                  sx={{
+                    height: "100%",
+                    overflowY: "scroll",
+                  }}
+                >
                   <Droppable droppableId={columnId} key={columnId}>
                     {(provided, snapshot) => {
                       return (
