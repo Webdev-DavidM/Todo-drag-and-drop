@@ -25,9 +25,15 @@ export const getAllToDo: any = createAsyncThunk<any>(
   async (_, { dispatch, getState }) => {
     try {
       const allTodos = await axios.get("http://localhost:5000/todos");
+      enqueueSnackbar("Todo list loaded successfully", {
+        variant: "success",
+      });
       return allTodos;
-    } catch {
-      console.error("err");
+    } catch (err) {
+      console.error(err);
+      enqueueSnackbar("Could not get your todo list", {
+        variant: "error",
+      });
     }
   }
 );
@@ -141,17 +147,11 @@ export const toDoListSlice = createSlice({
       })
       .addCase(getAllToDo.fulfilled, (state, action) => {
         state.loading = false;
-        const allToDos = action.payload.data;
+        const allToDos = action?.payload?.data || [];
+
         state.toDoList = allToDos;
-        enqueueSnackbar("Todo list loaded successfully", {
-          variant: "success",
-        });
       })
-      .addCase(getAllToDo.rejected, (state, action) => {
-        enqueueSnackbar("Could not get your todo list", {
-          variant: "warning",
-        });
-      });
+      .addCase(getAllToDo.rejected, (state, action) => {});
     // deleteToDo
     builder
       .addCase(deleteToDo.pending, (state, action) => {
@@ -168,7 +168,7 @@ export const toDoListSlice = createSlice({
       })
       .addCase(deleteToDo.rejected, (state, action) => {
         enqueueSnackbar("Todo could not be deleted", {
-          variant: "warning",
+          variant: "error",
         });
       });
     // createToDo
@@ -186,7 +186,7 @@ export const toDoListSlice = createSlice({
       })
       .addCase(createToDo.rejected, (state, action) => {
         enqueueSnackbar("Todo could not be saved", {
-          variant: "warning",
+          variant: "error",
         });
       });
     // updateToDoStatus
@@ -204,7 +204,7 @@ export const toDoListSlice = createSlice({
       })
       .addCase(updateToDoStatus.rejected, (state, action) => {
         enqueueSnackbar("Todo status updatecould not be saved", {
-          variant: "warning",
+          variant: "error",
         });
       });
     // updateToDo
@@ -224,7 +224,7 @@ export const toDoListSlice = createSlice({
       })
       .addCase(updateToDo.rejected, (state, action) => {
         enqueueSnackbar("Todo could not be saved", {
-          variant: "warning",
+          variant: "error",
         });
       });
   },
