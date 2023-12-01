@@ -167,7 +167,6 @@ function Board() {
                 <Grid
                   container
                   sx={{
-                    height: "100%",
                     overflowY: "scroll",
                   }}
                 >
