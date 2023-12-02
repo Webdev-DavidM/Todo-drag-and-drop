@@ -3,12 +3,8 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { enqueueSnackbar } from "notistack";
 
-type Todo = {
-  id: string;
-  title: string;
-  details: string;
-  column: string;
-};
+// type
+import { Todo } from "../types";
 
 export type InitialState = {
   loading: boolean;
@@ -20,7 +16,7 @@ export type InitialState = {
   deleteId: string;
 };
 
-export const getAllToDo: any = createAsyncThunk<any>(
+export const getAllToDo = createAsyncThunk(
   "toDoList/getAllToDo",
   async (_, { dispatch, getState }) => {
     try {
@@ -38,9 +34,9 @@ export const getAllToDo: any = createAsyncThunk<any>(
   }
 );
 
-export const createToDo: any = createAsyncThunk<any>(
+export const createToDo = createAsyncThunk(
   "toDoList/createToDo",
-  async (todo: any, { dispatch, getState }) => {
+  async (todo: Todo, { dispatch, getState }) => {
     try {
       const updatedTodos = await axios.post("http://localhost:5000/todos", {
         todo,
@@ -52,9 +48,9 @@ export const createToDo: any = createAsyncThunk<any>(
   }
 );
 
-export const updateToDoStatus: any = createAsyncThunk<any>(
+export const updateToDoStatus = createAsyncThunk(
   "toDoList/updateToDoStatus",
-  async (todos: any, { dispatch, getState }) => {
+  async (todos: Todo[], { dispatch, getState }) => {
     try {
       const updatedTodos = await axios.put(
         "http://localhost:5000/todos/updateColumns",
@@ -69,9 +65,9 @@ export const updateToDoStatus: any = createAsyncThunk<any>(
   }
 );
 
-export const deleteToDo: any = createAsyncThunk<any>(
+export const deleteToDo = createAsyncThunk(
   "toDoList/deleteToDo",
-  async (deleteId: any, { dispatch, getState }) => {
+  async (deleteId: string, { dispatch, getState }) => {
     try {
       const newTodo = await axios.delete("http://localhost:5000/todos", {
         data: { id: deleteId },
@@ -160,7 +156,7 @@ export const toDoListSlice = createSlice({
       .addCase(deleteToDo.fulfilled, (state, action) => {
         state.loading = false;
 
-        const allToDos = action.payload.data;
+        const allToDos = action?.payload?.data || [];
         state.toDoList = allToDos;
         enqueueSnackbar("Todo deleted successfully", {
           variant: "success",
@@ -181,7 +177,7 @@ export const toDoListSlice = createSlice({
         enqueueSnackbar("Todo created and saved.", {
           variant: "success",
         });
-        const allToDos = action.payload.data;
+        const allToDos = action?.payload?.data || [];
         state.toDoList = allToDos;
       })
       .addCase(createToDo.rejected, (state, action) => {
@@ -199,7 +195,7 @@ export const toDoListSlice = createSlice({
         enqueueSnackbar("Todo status updated and saved.", {
           variant: "success",
         });
-        const allToDos = action.payload.data;
+        const allToDos = action?.payload?.data || [];
         state.toDoList = allToDos;
       })
       .addCase(updateToDoStatus.rejected, (state, action) => {
@@ -218,8 +214,7 @@ export const toDoListSlice = createSlice({
           variant: "success",
         });
         console.log("action.payload.data", action.payload);
-        const allToDos = action?.payload?.data;
-
+        const allToDos = action?.payload?.data || [];
         state.toDoList = allToDos;
       })
       .addCase(updateToDo.rejected, (state, action) => {

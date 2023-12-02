@@ -1,12 +1,17 @@
 import { updateToDoStatus } from "../redux/toDoListReducer";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 
 // helpers
 import { flattenColumnObjectToTodoListArray } from "../helpers/flattenColumnObjectToTodoListArray";
+import { ColumnsObject } from "../types";
 
 export const useOnDragEnd = () => {
-    const dispatch = useDispatch(); 
-    const onDragEnd = (result: any, columns: any, setColumns: any) => {
+  const dispatch = useDispatch();
+  const onDragEnd = (
+    result: any,
+    columns: ColumnsObject,
+    setColumns: (columns: ColumnsObject) => void
+  ) => {
     if (!result.destination) return;
     const { source, destination } = result;
 
@@ -50,8 +55,7 @@ export const useOnDragEnd = () => {
         flattenColumnObjectToTodoListArray(columnsUpdated);
       dispatch(updateToDoStatus(flattenedTodoList));
     }
-    };
-
-    return { onDragEnd };
   };
 
+  return { onDragEnd };
+};
