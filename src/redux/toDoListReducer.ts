@@ -20,7 +20,9 @@ export const getAllToDo = createAsyncThunk(
   "toDoList/getAllToDo",
   async (_, { dispatch, getState }) => {
     try {
-      const allTodos = await axios.get("http://localhost:5000/todos");
+      const allTodos = await axios.get(
+        "https://pj10dt5iod.execute-api.eu-west-2.amazonaws.com/dev/todos"
+      );
       enqueueSnackbar("Todo list loaded successfully", {
         variant: "success",
       });
