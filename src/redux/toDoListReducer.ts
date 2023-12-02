@@ -10,7 +10,7 @@ type Todo = {
   column: string;
 };
 
-type InitialState = {
+export type InitialState = {
   loading: boolean;
   toDoList: Todo[] | [];
   authenticated: boolean;

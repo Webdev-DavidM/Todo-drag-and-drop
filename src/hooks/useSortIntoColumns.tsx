@@ -5,10 +5,13 @@ import { useSelector } from "react-redux";
 import { COLUMN } from "../enums";
 
 // Types
-import { Todo } from "../types";
+import { ColumnsObject, Todo } from "../types";
+import { RootState } from "../redux/store";
 
-export const useSortItemsIntoColumns = (setColumns: any) => {
-  const toDos = useSelector((state: any) => state.toDoList.toDoList);
+export const useSortItemsIntoColumns = (
+  setColumns: (columns: ColumnsObject) => void
+) => {
+  const toDos = useSelector((state: RootState) => state.toDoList.toDoList);
 
   useEffect(() => {
     const toDo = toDos.filter((todo: Todo) => todo.column === COLUMN.TO_DO);

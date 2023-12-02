@@ -13,7 +13,5 @@ export type Column = {
 };
 
 export type ColumnsObject = {
-  toDo: Column;
-  inProgress: Column;
-  done: Column;
+  [key: string]: Column;
 };
