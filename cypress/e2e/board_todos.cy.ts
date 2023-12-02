@@ -3,13 +3,16 @@
 describe("tests for todos", () => {
   beforeEach(() => {
     cy.viewport(1500, 1000);
-    cy.intercept("http://localhost:5000/todos", (req) => {
-      return req.reply({
-        fixture: "getAllTodos.json",
-        statusCode: 200,
-        headers: "application/json",
-      });
-    });
+    cy.intercept(
+      "https://pj10dt5iod.execute-api.eu-west-2.amazonaws.com/dev/todos",
+      (req) => {
+        return req.reply({
+          fixture: "getAllTodos.json",
+          statusCode: 200,
+          headers: "application/json",
+        });
+      }
+    );
     cy.intercept("POST", "http://localhost:5000/todos", (req) => {
       return req.reply({
         fixture: "createTodo.json",
