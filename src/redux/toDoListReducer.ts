@@ -21,7 +21,7 @@ export const getAllToDo = createAsyncThunk(
   async (_, { dispatch, getState }) => {
     try {
       const allTodos = await axios.get(
-        "https://pj10dt5iod.execute-api.eu-west-2.amazonaws.com/dev/todos"
+        "https://bxg98szdc8.execute-api.eu-west-2.amazonaws.com/dev/todos"
       );
       enqueueSnackbar("Todo list loaded successfully", {
         variant: "success",
@@ -40,9 +40,12 @@ export const createToDo = createAsyncThunk(
   "toDoList/createToDo",
   async (todo: Todo, { dispatch, getState }) => {
     try {
-      const updatedTodos = await axios.post("http://localhost:5000/todos", {
-        todo,
-      });
+      const updatedTodos = await axios.post(
+        "https://bxg98szdc8.execute-api.eu-west-2.amazonaws.com/dev/todos",
+        {
+          todo,
+        }
+      );
       return updatedTodos;
     } catch {
       console.error("err");
@@ -55,7 +58,7 @@ export const updateToDoStatus = createAsyncThunk(
   async (todos: Todo[], { dispatch, getState }) => {
     try {
       const updatedTodos = await axios.put(
-        "http://localhost:5000/todos/updateColumns",
+        "https://bxg98szdc8.execute-api.eu-west-2.amazonaws.com/dev/todos/updateColumns",
         {
           todos,
         }
@@ -71,9 +74,12 @@ export const deleteToDo = createAsyncThunk(
   "toDoList/deleteToDo",
   async (deleteId: string, { dispatch, getState }) => {
     try {
-      const newTodo = await axios.delete("http://localhost:5000/todos", {
-        data: { id: deleteId },
-      });
+      const newTodo = await axios.delete(
+        "https://bxg98szdc8.execute-api.eu-west-2.amazonaws.com/dev/todos",
+        {
+          data: { id: deleteId },
+        }
+      );
       return newTodo;
     } catch {
       console.error("err");
@@ -85,9 +91,12 @@ export const updateToDo = createAsyncThunk(
   "toDoList/updateToDo",
   async (updatedTodo: Todo, { dispatch, getState }) => {
     try {
-      const updatedTodos = await axios.put("http://localhost:5000/todos", {
-        todo: updatedTodo,
-      });
+      const updatedTodos = await axios.put(
+        "https://bxg98szdc8.execute-api.eu-west-2.amazonaws.com/dev/todos",
+        {
+          todo: updatedTodo,
+        }
+      );
       return updatedTodos;
     } catch {
       console.error("err");
