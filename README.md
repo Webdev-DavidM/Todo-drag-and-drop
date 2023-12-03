@@ -2,7 +2,7 @@
 
 ## Overview
 
-This full stack website was my first experience of using the react testing library, typescript and graphql. The backend is hosted on heroku and the front end is hosted on a separate heroku express application to make sure react router works.
+This todo application is based around a kanban drag and drop board making tracking tasks from left to right easy and intuitive.
 
 ## Features
 
