@@ -1,37 +1,55 @@
-https://github.com/Webdev-DavidM/Todo-drag-and-drop/assets/56081000/adb2e345-d69b-4e45-8ade-7df485222dd6
+# Ecommerce audio shop app
 
-**Key feature**
+## Overview
 
-1. Typescript
-2. Drag and drop kanban style to do list
-3. Custom hooks
-4. React redux
-5. Material Ui
-6. Toast pop up for successful saves to the server
+This full stack website was my first experience of using the react testing library, typescript and graphql. The backend is hosted on heroku and the front end is hosted on a separate heroku express application to make sure react router works.
 
-**Still to do**
+## Features
 
-1. Fix the glitch when items are dragged- FIXED, video updated to show this- done
-2. Improve the UI styling- done
-3. Add JWT to authorise changing the todos
-4. Host the react app on aws s3 and the backend via serverless framework to a api lambda proxy
-5. Add a ci/cd pipeline to automatically deploy once tests are passed via github to s3
-6. Create a login and sign up so the protected route can work
-7. Show the saved board for a selected user
-8. Creat testing with jest and react testing library which would include the following tests
+- A user can navigate the site
+- They can add products to the cart, if the user tries to add more than in stock a warning message is shown
+- The user can log in and sign up
+- The user can only checkout if they are signed in
+- Local storage saves their cart
+- Responsive website- changes layout on mobile, tablet and desktop
 
-i)If the user is not logged in they are taken to the login screen
+## Screenshot
 
-ii)If their login is unsucessfult they get a message saying “login unsuccessful
+![](/screenshot.png)
 
-iii) If they try to go directly to the board route without authentication they are sent back to the log in screen
+## Live site
 
-iv) If the user deletes an item, it will not show in the ui anymore
+http://audio-first-react-express.herokuapp.com
 
-If the user edits a todo and save the ui is updated
+## My process
 
-v) If you click edit the field changes from to become editable
+Built with
 
-vi) If I create a todo it shows in the ui
+- React and React hooks
+- Formik is used to create the sign up, log in and checkout details. Formik handles the validation
+- SASS using BEM 
+- React transition group is used to create exiting transitions as forms enter and leave the page
+- Mobile-first workflow- the application layout changes for mobile, tablet and desktop views, on mobile there is a downdown menu.
+- Developed from Sketch design prototypes
+- React testing library used for the front end
+- GraphQL
+- Typescript
+- Express
+- MongoDB
+- React slick slider used for carousel on the product page
+- Material UI for loading spinner
+- Local storage used to persist the cart if the user refreshes or returns to the page
+- React router
+- Heroku deployment
 
-vii)If I put a array into this hook it will return an object sorted into columns
+### Still to do
+
+Integrate a payment system such as stripe or paypal
+
+# To run locally
+
+To run this project please download and from the terminal
+
+- type npm i to load the dependencies
+
+- npm start to view the project.
