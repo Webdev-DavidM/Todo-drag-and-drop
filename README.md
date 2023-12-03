@@ -14,7 +14,7 @@ This full stack website was my first experience of using the react testing libra
 
 ## Screenshot
 
-![](/screenshot.png)
+![](/todo.kanban.png)
 
 ## Live site
 
