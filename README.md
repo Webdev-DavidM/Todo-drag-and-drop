@@ -1,4 +1,4 @@
-# Ecommerce audio shop app
+# React Typescript Todo Kanban 
 
 ## Overview
 
@@ -6,12 +6,11 @@ This full stack website was my first experience of using the react testing libra
 
 ## Features
 
-- A user can navigate the site
-- They can add products to the cart, if the user tries to add more than in stock a warning message is shown
-- The user can log in and sign up
-- The user can only checkout if they are signed in
-- Local storage saves their cart
-- Responsive website- changes layout on mobile, tablet and desktop
+- The user can create a todo
+- The user can update a todo
+- The user can delete a todo
+- The user drag and drop the todo the relevant column
+- Changes are saved to a database
 
 ## Screenshot
 
@@ -19,32 +18,24 @@ This full stack website was my first experience of using the react testing libra
 
 ## Live site
 
-http://audio-first-react-express.herokuapp.com
+http://davidm-kanban-todo-project.s3-website.eu-west-2.amazonaws.com/
 
 ## My process
 
 Built with
 
-- React and React hooks
-- Formik is used to create the sign up, log in and checkout details. Formik handles the validation
-- SASS using BEM 
-- React transition group is used to create exiting transitions as forms enter and leave the page
-- Mobile-first workflow- the application layout changes for mobile, tablet and desktop views, on mobile there is a downdown menu.
-- Developed from Sketch design prototypes
-- React testing library used for the front end
-- GraphQL
+- React
 - Typescript
-- Express
-- MongoDB
-- React slick slider used for carousel on the product page
-- Material UI for loading spinner
-- Local storage used to persist the cart if the user refreshes or returns to the page
-- React router
-- Heroku deployment
+- Cypress and Jest testing
+- Custom hooks
+- Redux
+- CI/CD pipeline via githubs actions deploying the app to AWS S3
 
 ### Still to do
 
-Integrate a payment system such as stripe or paypal
+- Create a login and sign up page which saves the todos for a particular user
+- The board route is protected
+- JWT tokens are used to authorize making todo changes
 
 # To run locally
 
@@ -53,3 +44,5 @@ To run this project please download and from the terminal
 - type npm i to load the dependencies
 
 - npm start to view the project.
+
+- 
