@@ -11,6 +11,7 @@ This full stack website was my first experience of using the react testing libra
 - The user can delete a todo
 - The user drag and drop the todo the relevant column
 - Changes are saved to a database
+- Modals, loading spinners and toast alerts all improve the UX.
 
 ## Screenshot
 
@@ -27,15 +28,20 @@ Built with
 - React
 - Typescript
 - Cypress and Jest testing
+- Form validation with yup and formik
+- Material UI for the interface components
+- React beautiful d and d
 - Custom hooks
 - Redux
-- CI/CD pipeline via githubs actions deploying the app to AWS S3
+- CI/CD pipeline via githubs actions deploying the app to AWS S3 after tests are successfully passed
+- Backend is Node, Express and MongoDB hosted on a AWS Lambda proxy integration via AWS API gateway
 
 ### Still to do
 
 - Create a login and sign up page which saves the todos for a particular user
 - The board route is protected
-- JWT tokens are used to authorize making todo changes
+- JWT tokens are used to authorize making todo changes.
+- Resolve any console warnings.
 
 # To run locally
 
@@ -45,4 +51,4 @@ To run this project please download and from the terminal
 
 - npm start to view the project.
 
-- 
+
